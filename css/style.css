@@ -1,0 +1,62 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #11183d;
+}
+
+.portada {
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    overflow: hidden;
+}
+
+.titulo-portafolio {
+    position: absolute;
+    top: 60%;
+    left: 42.2%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+
+}
+
+.titulo-portafolio h1 {
+    color: #fffdd0;
+    font-family: Impact, sans-serif;
+    font-size: clamp(500px, 13vw, 600px);
+    font-weight: 25;
+    line-height: 1.08;
+    letter-spacing: 80px;
+}
+
+.folio {
+    margin-left: 530.1px;
+}
+
+.brenda {
+    position: absolute;
+    width: 2220px;
+    height: auto;
+
+    top: 42%;
+    left: 67.4%;
+
+    transform: translate(-50%, -50%);
+    z-index: 2;
+}
+
+.alas {
+    position: absolute;
+    width: 3000px;
+    height: auto;
+
+    top: 40%;
+    left: 69.9%;
+
+    transform: translate(-50%, -50%);
+    z-index: 3;
+}
