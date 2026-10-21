@@ -1,0 +1,2084 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+        <meta charset="utf-8">
+        <title> Escenario 3 Heladeria</title>
+        <style>
+                body {
+                        margin: 0;
+                        overflow: hidden;
+                }
+
+                canvas {
+                        background: red;
+                }
+        </style>
+</head>
+
+<body>
+        <div>
+                <div class="block1">
+                        <canvas id="mycanvas"></canvas>
+                        <script src="./Ananda Black Personal Use_Regular.js"></script>
+
+
+                        <script type="importmap">
+{
+    "imports": {
+        "three": "./three.module.js",
+        "three/FontLoader": "./FontLoader.js",
+        "three/TextGeometry": "./TextGeometry.js"
+    }
+}
+</script>
+
+                        <script type="module">
+
+                                // Librerías importadas para hacer funcionar three.js y el OrbitControls
+                                //import * as THREE from './js/three.module.js';
+                                import * as THREE from 'three';
+
+                                import { OrbitControls } from './OrbitControls.js';
+
+
+
+                                //import {TextGeometry} from './TextGeometry.js';
+                                //import {FontLoader} from './FontLoader.js';
+                                import { TextGeometry } from 'three/TextGeometry';
+                                import { FontLoader } from 'three/FontLoader';
+
+
+                                // Inicio
+                                var renderer = new THREE.WebGLRenderer({ canvas: document.getElementById('mycanvas'), antialias: true });
+
+                                // Tamaño de la pantalla
+                                renderer.setPixelRatio(window.devicePixelRatio);
+                                renderer.setSize(window.innerWidth, window.innerHeight);
+
+                                renderer.shadowMap.enabled = true;
+                                renderer.shadowMap.type = THREE.PCFShadowMao;
+
+
+
+
+                                // Se crea la escena
+                                var scene = new THREE.Scene();
+
+                                // Opciones de camara
+                                var camera = new THREE.PerspectiveCamera(35, window.innerWidth / (window.innerHeight), 0.5, 1000);
+
+
+                                var controls = new OrbitControls(camera, renderer.domElement);
+
+                                camera.position.set(250, 100, 0);
+                                camera.lookAt(0, 0, 0);
+
+
+                                // Luces
+
+
+                                var light = new THREE.DirectionalLight(0x191334, .1);
+
+
+
+
+                                scene.add(light);
+                                //cuadro malla
+
+                                const gridHelper = new THREE.GridHelper(200, 80, 0x30254F, 0x26252A);
+                                scene.add(gridHelper);
+                                const axesHelper = new THREE.AxesHelper(5);
+                                scene.add(axesHelper);
+
+
+
+                                //piso
+
+
+                                var geometry1 = new THREE.BoxGeometry(100, .1, 100);
+                                var texture = new THREE.TextureLoader().load("FONDOO.jpg");
+                                var material1 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh1 = new THREE.Mesh(geometry1, material1);
+                                mesh1.position.set(0, 2, 0);
+                                //piso afuera calle
+
+                                var geometry1218 = new THREE.BoxGeometry(200, .1, 200);
+                                var texture = new THREE.TextureLoader().load("piso calle.jpg");
+                                var material1218 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh1218 = new THREE.Mesh(geometry1218, material1218);
+                                mesh1218.position.set(0, 1, 0);
+
+
+                                ///muraal
+                                var geometry1219 = new THREE.ConeGeometry(20, 50, 40)
+                                var texture = new THREE.TextureLoader().load("cono.jpg");
+                                var material1219 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh1219 = new THREE.Mesh(geometry1219, material1219);
+                                mesh1219.position.set(35, 62, -40);
+                                mesh1219.rotation.set(1.75, 0, 0);
+
+
+                                var geometry1220 = new THREE.SphereGeometry(20, 25, 25)
+                                var material1220 = new THREE.MeshLambertMaterial({ color: 0xFA05CA });
+                                var mesh1220 = new THREE.Mesh(geometry1220, material1220);
+                                mesh1220.position.set(35, 62, -70);
+                                mesh1220.rotation.set(1.75, 0, 0);
+
+                                var geometry1221 = new THREE.SphereGeometry(20, 25, 25)
+                                var material1221 = new THREE.MeshLambertMaterial({ color: 0x57FA05 });
+                                var mesh1221 = new THREE.Mesh(geometry1221, material1221);
+                                mesh1221.position.set(35, 71, -70);
+                                mesh1221.rotation.set(1.75, 0, 0);
+
+                                var geometry1222 = new THREE.SphereGeometry(20, 25, 25)
+                                var material1222 = new THREE.MeshLambertMaterial({ color: 0x05EFFA });
+                                var mesh1222 = new THREE.Mesh(geometry1222, material1222);
+                                mesh1222.position.set(35, 71, -80);
+                                mesh1222.rotation.set(1.75, 0, 0);
+                                ///// texto
+
+                                var loader = new FontLoader();
+                                var fuente = loader.parse(FonJSON);
+                                var geometry1223 = new TextGeometry('ICE CREAM', {
+                                        font: fuente,
+                                        size: 8,
+                                        height: 10
+                                });
+                                geometry1223.center();
+                                var material1223 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh1223 = new THREE.Mesh(geometry1223, material1223);
+                                mesh1223.position.set(53, 53, -60);
+                                mesh1223.castShadow = true;
+                                mesh1223.rotation.set(0, 1.50, 0);
+
+                                ///// tubos trabes
+
+
+                                var geometry1224 = new THREE.CylinderGeometry(1, 1, 45, 40, 15)
+                                var material1224 = new THREE.MeshLambertMaterial({ color: 0xF39DEF });
+                                var mesh1224 = new THREE.Mesh(geometry1224, material1224);
+                                mesh1224.position.set(-10, 23, -95);
+
+
+                                var geometry1225 = new THREE.CylinderGeometry(1, 1, 45, 40, 15)
+                                var material1225 = new THREE.MeshLambertMaterial({ color: 0xF39DEF });
+                                var mesh1225 = new THREE.Mesh(geometry1225, material1225);
+                                mesh1225.position.set(1, 23, -53);
+
+                                var geometry1226 = new THREE.CylinderGeometry(1, 1, 45, 40, 15)
+                                var material1226 = new THREE.MeshLambertMaterial({ color: 0xF39DEF });
+                                var mesh1226 = new THREE.Mesh(geometry1226, material1226);
+                                mesh1226.position.set(1, 23, 95);
+
+
+                                var geometry1227 = new THREE.CylinderGeometry(1, 1, 45, 40, 15)
+                                var material1227 = new THREE.MeshLambertMaterial({ color: 0xF39DEF });
+                                var mesh1227 = new THREE.Mesh(geometry1227, material1227);
+                                mesh1227.position.set(1, 23, 53);
+
+                                // techo
+                                var geometry113 = new THREE.BoxGeometry(100, .1, 100);
+                                var texture = new THREE.TextureLoader().load("cuadros rosas.jpg");
+                                var material113 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh113 = new THREE.Mesh(geometry113, material113);
+                                mesh113.position.set(0, 40, 0);
+                                //// techo turqueza
+                                var geometry114 = new THREE.BoxGeometry(115, 4, 200);
+                                var material114 = new THREE.MeshLambertMaterial({ color: 0x63D6B9, });
+                                var mesh114 = new THREE.Mesh(geometry114, material114);
+                                mesh114.position.set(0, 42.5, 0);
+                                //// techo rosa
+                                var geometry1217 = new THREE.BoxGeometry(115, 2, 200);
+                                var material1217 = new THREE.MeshLambertMaterial({ color: 0xF39DEF });
+                                var mesh1217 = new THREE.Mesh(geometry1217, material1217);
+                                mesh1217.position.set(0, 46, 0);
+
+                                // Cubo1 pared  blanca derecha
+
+                                var geometry2 = new THREE.BoxGeometry(100, 2, 40, 2, 50, 200);
+                                var material2 = new THREE.MeshLambertMaterial({ color: 0x63D6B9 });
+                                var mesh2 = new THREE.Mesh(geometry2, material2);
+                                mesh2.position.set(0, 20, -50.5);
+                                mesh2.rotation.set(1.57, 0, 0);
+                                //pared rosa
+                                var geometry5 = new THREE.BoxGeometry(100, 0.5, 25, 2, 50, 200);
+                                var texture = new THREE.TextureLoader().load("cuadros rosas.jpg");
+                                var material5 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh5 = new THREE.Mesh(geometry5, material5);
+                                mesh5.position.set(0, 28, -49);
+                                mesh5.rotation.set(1.57, 0, 0);
+                                // Cubo2 pared  blanca  izquerda
+
+                                var geometry3 = new THREE.BoxGeometry(-101, 2, 40, 6, 100, 200);
+                                var material3 = new THREE.MeshLambertMaterial({ color: 0x63D6B9 });
+                                var mesh3 = new THREE.Mesh(geometry3, material3);
+                                mesh3.position.set(-0, 20, 51);
+                                mesh3.rotation.set(1.57, 0, 0);
+                                //pared rosa
+                                var geometry6 = new THREE.BoxGeometry(-101, 0.1, 25, 2, 50, 200);
+                                var texture = new THREE.TextureLoader().load("cuadros rosas.jpg");
+                                var material6 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh6 = new THREE.Mesh(geometry6, material6);
+                                mesh6.position.set(-0, 28, 49.8);
+                                mesh6.rotation.set(1.57, 0, 0);
+
+                                // Cubo3pared  atras balnca
+
+                                var geometry4 = new THREE.BoxGeometry(102, 2, 40, 6, 150, 200);
+                                var material4 = new THREE.MeshLambertMaterial({ color: 0x63D6B9 });
+                                var mesh4 = new THREE.Mesh(geometry4, material4);
+                                mesh4.position.set(-51, 20, -.7);
+                                mesh4.rotation.set(-1.57, 0, -1.58);
+
+
+
+                                //// pared delantera
+
+                                var geometry1213 = new THREE.BoxGeometry(25, 2, 40, 6, 80, 200);
+                                var material1213 = new THREE.MeshLambertMaterial({ color: 0x63D6B9 });
+                                var mesh1213 = new THREE.Mesh(geometry1213, material1213);
+                                mesh1213.position.set(51, 20, 39);
+                                mesh1213.rotation.set(-1.57, 0, -1.58);
+
+                                var geometry1214 = new THREE.BoxGeometry(25, 2, 40, 6, 80, 200);
+                                var material1214 = new THREE.MeshLambertMaterial({ color: 0x63D6B9 });
+                                var mesh1214 = new THREE.Mesh(geometry1214, material1214);
+                                mesh1214.position.set(51, 20, -39);
+                                mesh1214.rotation.set(-1.57, 0, -1.58);
+
+                                var geometry1215 = new THREE.BoxGeometry(25, 2, 40, 6, 80, 200);
+                                var material1215 = new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.6 });
+                                var mesh1215 = new THREE.Mesh(geometry1215, material1215);
+                                mesh1215.position.set(51, 20, -15);
+                                mesh1215.rotation.set(-1.57, 0, -1.58);
+
+                                var geometry1216 = new THREE.BoxGeometry(25, 2, 40, 6, 80, 200);
+                                var material1216 = new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.6 });
+                                var mesh1216 = new THREE.Mesh(geometry1216, material1216);
+                                mesh1216.position.set(51, 20, 15);
+                                mesh1216.rotation.set(-1.57, 0, -1.58);
+
+                                //pared rosa
+
+                                var geometry7 = new THREE.BoxGeometry(100, 0.5, 25, 2, 50, 200);
+                                var texture = new THREE.TextureLoader().load("cuadros rosas.jpg");
+                                var material7 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh7 = new THREE.Mesh(geometry7, material7);
+                                mesh7.position.set(-50, 28, -.2);
+                                mesh7.rotation.set(-1.57, 0, -1.58);
+                                //pared pequeña  
+                                var geometry8 = new THREE.BoxGeometry(82, 2, 10, 2, 50, 200);
+                                var texture = new THREE.TextureLoader().load("cuadros rosas.jpg");
+                                var material8 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh8 = new THREE.Mesh(geometry8, material8);
+                                mesh8.position.set(-8, 6, -15);
+                                mesh8.rotation.set(1.57, 0, 0);
+
+
+
+
+                                /////////////////////////////////////
+                                //MESA1 GRIS
+
+                                var geometry9 = new THREE.BoxGeometry(10, 12, 2);
+                                var material9 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh9 = new THREE.Mesh(geometry9, material9);
+                                mesh9.position.set(-33, 10, -21);
+                                mesh9.rotation.set(-1.57, 0, -1.58);
+                                //MESA1 BLANCO
+                                var geometry10 = new THREE.BoxGeometry(10, 12, 0.5);
+                                var material10 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh10 = new THREE.Mesh(geometry10, material10);
+                                mesh10.position.set(-33, 11, -21);
+                                mesh10.rotation.set(-1.57, 0, -1.58);
+
+                                ///////////// ////////////////////////////
+                                //tubo mesa 1
+                                var geometry11 = new THREE.CylinderGeometry(0.5, 0.5, 9, 8, 5)
+                                var material11 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh11 = new THREE.Mesh(geometry11, material11);
+                                mesh11.position.set(-33, 5, -21);
+                                mesh11.rotation.set(0, 0, 0);
+                                //tapa tubo mesa1
+                                var geometry12 = new THREE.CylinderGeometry(5, 5, 0.5, 10, 5)
+                                var material12 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh12 = new THREE.Mesh(geometry12, material12);
+                                mesh12.position.set(-33, 1, -21);
+                                mesh12.rotation.set(0, 0, 0);
+                                ////////////////////////////////
+
+                                //sillon1 color  negro
+
+                                var geometry16 = new THREE.BoxGeometry(8, 2, 10);
+                                var material16 = new THREE.MeshLambertMaterial({ color: 0x050505 });
+                                var mesh16 = new THREE.Mesh(geometry16, material16);
+                                mesh16.position.set(-45, 1.5, -21);
+                                mesh16.rotation.set(0, 0, 0);
+
+                                //sillon1 color turqueza
+                                var geometry17 = new THREE.BoxGeometry(6, 3, 10);
+                                var material17 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh17 = new THREE.Mesh(geometry17, material17);
+                                mesh17.position.set(-44, 4, -21);
+                                mesh17.rotation.set(0, 0, 0);
+
+                                //sillon1Respaldo   
+                                var geometry18 = new THREE.BoxGeometry(2, 10, 10);
+                                var material18 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh18 = new THREE.Mesh(geometry18, material18);
+                                mesh18.position.set(-47, 8, -21);
+                                mesh18.rotation.set(0, 0, 0);
+
+                                //SILLON1 RESPALDO  BLANCO
+                                var geometry39 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material39 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh39 = new THREE.Mesh(geometry39, material39);
+                                mesh39.position.set(-46, 8, -21);
+                                mesh39.rotation.set(0, 0, 0);
+
+                                //sillon2 color  negro
+
+                                var geometry13 = new THREE.BoxGeometry(8, 2, 10);
+                                var material13 = new THREE.MeshLambertMaterial({ color: 0x050505 });
+                                var mesh13 = new THREE.Mesh(geometry13, material13);
+                                mesh13.position.set(-22, 1.5, -21);
+                                mesh13.rotation.set(0, 0, 0);
+
+                                //sillon2 color turqueza
+                                var geometry14 = new THREE.BoxGeometry(6, 3, 10);
+                                var material14 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh14 = new THREE.Mesh(geometry14, material14);
+                                mesh14.position.set(-22, 4, -21);
+                                mesh14.rotation.set(0, 0, 0);
+
+                                //sillon2Respaldo   
+                                var geometry15 = new THREE.BoxGeometry(2, 10, 10);
+                                var material15 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh15 = new THREE.Mesh(geometry15, material15);
+                                mesh15.position.set(-19, 8, -21);
+                                mesh15.rotation.set(0, 0, 0);
+                                //sillon 2 blanco respaldo  
+
+                                var geometry40 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material40 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh40 = new THREE.Mesh(geometry40, material40);
+                                mesh40.position.set(-20, 8, -21);
+                                mesh40.rotation.set(0, 0, 0);
+
+                                //sillon3 color  negro
+
+                                var geometry19 = new THREE.BoxGeometry(8, 2, 10);
+                                var material19 = new THREE.MeshLambertMaterial({ color: 0x050505 });
+                                var mesh19 = new THREE.Mesh(geometry19, material19);
+                                mesh19.position.set(-14, 1.5, -21);
+                                mesh19.rotation.set(0, 0, 0);
+
+                                //sillon3 color turqueza
+                                var geometry20 = new THREE.BoxGeometry(6, 3, 10);
+                                var material20 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh20 = new THREE.Mesh(geometry20, material20);
+                                mesh20.position.set(-13, 4, -21); +
+                                        mesh20.rotation.set(0, 0, 0);
+
+                                //sillon3Respaldo   
+                                var geometry21 = new THREE.BoxGeometry(2, 10, 10);
+                                var material21 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh21 = new THREE.Mesh(geometry21, material21);
+                                mesh21.position.set(-17, 8, -21);
+                                mesh21.rotation.set(0, 0, 0);
+
+                                //sillon3Respaldo    blanco
+                                var geometry41 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material41 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh41 = new THREE.Mesh(geometry41, material41);
+                                mesh41.position.set(-16, 8, -21);
+                                mesh41.rotation.set(0, 0, 0);
+                                //MESA2 GRIS
+
+                                var geometry22 = new THREE.BoxGeometry(10, 12, 2);
+                                var material22 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh22 = new THREE.Mesh(geometry22, material22);
+                                mesh22.position.set(-3, 10, -21);
+                                mesh22.rotation.set(-1.57, 0, -1.58);
+                                //MESA2 BLANCO
+                                var geometry23 = new THREE.BoxGeometry(10, 12, 0.5);
+                                var material23 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh23 = new THREE.Mesh(geometry23, material23);
+                                mesh23.position.set(-3, 11, -21);
+                                mesh23.rotation.set(-1.57, 0, -1.58);
+
+                                //tubo mesa 2
+                                var geometry24 = new THREE.CylinderGeometry(0.5, 0.5, 9, 8, 5)
+                                var material24 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh24 = new THREE.Mesh(geometry24, material24);
+                                mesh24.position.set(-3, 5, -21);
+                                mesh24.rotation.set(0, 0, 0);
+                                //tapa tubo mesa 2
+                                var geometry25 = new THREE.CylinderGeometry(5, 5, 0.5, 10, 5)
+                                var material25 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh25 = new THREE.Mesh(geometry25, material25);
+                                mesh25.position.set(-3, 1, -21);
+                                mesh25.rotation.set(0, 0, 0);
+
+                                //sillon4 color  negro
+
+                                var geometry26 = new THREE.BoxGeometry(8, 2, 10);
+                                var material26 = new THREE.MeshLambertMaterial({ color: 0x050505 });
+                                var mesh26 = new THREE.Mesh(geometry26, material26);
+                                mesh26.position.set(7, 1.5, -21);
+                                mesh26.rotation.set(0, 0, 0);
+
+                                //sillon4 color turqueza
+                                var geometry27 = new THREE.BoxGeometry(8, 3, 10);
+                                var material27 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh27 = new THREE.Mesh(geometry27, material27);
+                                mesh27.position.set(7, 4, -21);
+                                mesh27.rotation.set(0, 0, 0);
+
+                                //sillon4 Respaldo   
+                                var geometry28 = new THREE.BoxGeometry(2, 10, 10);
+                                var material28 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh28 = new THREE.Mesh(geometry28, material28);
+                                mesh28.position.set(10, 8, -21);
+                                //sillon4 Respaldo   Blanco
+                                var geometry42 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material42 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh42 = new THREE.Mesh(geometry42, material42);
+                                mesh42.position.set(7, 8, -21);
+                                //MESA3 GRIS
+
+                                var geometry29 = new THREE.BoxGeometry(10, 12, 2);
+                                var material29 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh29 = new THREE.Mesh(geometry29, material29);
+                                mesh29.position.set(20, 10, -21);
+                                mesh29.rotation.set(-1.57, 0, -1.58);
+                                //MESA3 BLANCO
+                                var geometry30 = new THREE.BoxGeometry(10, 12, 0.5);
+                                var material30 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh30 = new THREE.Mesh(geometry30, material30);
+                                mesh30.position.set(20, 11, -21);
+                                mesh30.rotation.set(-1.57, 0, -1.58);
+
+                                //tubo mesa 3
+                                var geometry31 = new THREE.CylinderGeometry(0.5, 0.5, 9, 8, 5)
+                                var material31 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh31 = new THREE.Mesh(geometry31, material31);
+                                mesh31.position.set(20, 5, -21);
+                                mesh31.rotation.set(0, 0, 0);
+                                //tapa tubo mesa 3
+                                var geometry32 = new THREE.CylinderGeometry(5, 5, 0.5, 10, 5)
+                                var material32 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh32 = new THREE.Mesh(geometry32, material32);
+                                mesh32.position.set(20, 1, -21);
+                                mesh32.rotation.set(0, 0, 0);
+                                //sillon5 color  negro
+
+                                var geometry33 = new THREE.BoxGeometry(8, 2, 10);
+                                var material33 = new THREE.MeshLambertMaterial({ color: 0x050505 });
+                                var mesh33 = new THREE.Mesh(geometry33, material33);
+                                mesh33.position.set(10, 1.5, -21);
+                                mesh33.rotation.set(0, 0, 0);
+
+                                //sillon5 color turqueza
+                                var geometry34 = new THREE.BoxGeometry(6, 3, 10);
+                                var material34 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh34 = new THREE.Mesh(geometry34, material34);
+                                mesh34.position.set(11, 4, -21);
+                                mesh34.rotation.set(0, 0, 0);
+
+                                //sillon5Respaldo   
+                                var geometry35 = new THREE.BoxGeometry(2, 10, 10);
+                                var material35 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh35 = new THREE.Mesh(geometry35, material35);
+                                mesh35.position.set(8, 8, -21);
+                                mesh35.rotation.set(0, 0, 0);
+                                //sillon5Respaldo    blanco
+                                var geometry43 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material43 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh43 = new THREE.Mesh(geometry43, material43);
+                                mesh43.position.set(11, 8, -21);
+                                mesh43.rotation.set(0, 0, 0);
+                                //sillon6 color  negro
+
+                                var geometry36 = new THREE.BoxGeometry(8, 2, 10);
+                                var material36 = new THREE.MeshLambertMaterial({ color: 0x050505 });
+                                var mesh36 = new THREE.Mesh(geometry36, material36);
+                                mesh36.position.set(30, 1.5, -21);
+                                mesh36.rotation.set(0, 0, 0);
+
+                                //sillon6 color turqueza
+                                var geometry37 = new THREE.BoxGeometry(8, 3, 10);
+                                var material37 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh37 = new THREE.Mesh(geometry37, material37);
+                                mesh37.position.set(30, 4, -21);
+                                mesh37.rotation.set(0, 0, 0);
+
+                                //sillon6 Respaldo   
+                                var geometry38 = new THREE.BoxGeometry(2, 10, 10);
+                                var material38 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh38 = new THREE.Mesh(geometry38, material38);
+                                mesh38.position.set(33, 8, -21);
+                                //sillon6 Respaldo blanco   
+                                var geometry44 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material44 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh44 = new THREE.Mesh(geometry44, material44);
+                                mesh44.position.set(32, 8, -21);
+
+                                ////// //////////////////
+                                //MESA4 GRIS
+
+                                var geometry45 = new THREE.BoxGeometry(12, 12, 2);
+                                var material45 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh45 = new THREE.Mesh(geometry45, material45);
+                                mesh45.position.set(-34, 10, -42);
+                                mesh45.rotation.set(-1.57, 0, -1.58);
+                                //MESA4 BLANCO
+                                var geometry46 = new THREE.BoxGeometry(12, 12, 0.5);
+                                var material46 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh46 = new THREE.Mesh(geometry46, material46);
+                                mesh46.position.set(-34, 11, -42);
+                                mesh46.rotation.set(-1.57, 0, -1.58);
+
+                                //tubo mesa 4
+                                var geometry47 = new THREE.CylinderGeometry(0.5, 0.5, 9, 8, 5)
+                                var material47 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh47 = new THREE.Mesh(geometry47, material47);
+                                mesh47.position.set(-34, 5, -42);
+                                mesh47.rotation.set(0, 0, 0);
+                                //tapa tubo mesa 4
+                                var geometry48 = new THREE.CylinderGeometry(5, 5, 0.5, 10, 5)
+                                var material48 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh48 = new THREE.Mesh(geometry48, material48);
+                                mesh48.position.set(-34, 1, -42);
+                                mesh48.rotation.set(0, 0, 0);
+                                ////////////////////////////////
+
+                                //sillon7 color  negro
+
+                                var geometry49 = new THREE.BoxGeometry(8, 2, 15);
+                                var material49 = new THREE.MeshLambertMaterial({ color: 0x050505 });
+                                var mesh49 = new THREE.Mesh(geometry49, material49);
+                                mesh49.position.set(-45, 1.5, -42);
+                                mesh49.rotation.set(0, 0, 0);
+
+                                //sillon7 color turqueza
+                                var geometry50 = new THREE.BoxGeometry(6, 3, 15);
+                                var material50 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh50 = new THREE.Mesh(geometry50, material50);
+                                mesh50.position.set(-44, 4, -42);
+                                mesh50.rotation.set(0, 0, 0);
+
+                                //sillon7Respaldo   
+                                var geometry51 = new THREE.BoxGeometry(2, 10, 15);
+                                var material51 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh51 = new THREE.Mesh(geometry51, material51);
+                                mesh51.position.set(-47, 8, -42);
+                                mesh51.rotation.set(0, 0, 0);
+
+                                //SILLON7 RESPALDO  BLANCO 2
+                                var geometry52 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material52 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh52 = new THREE.Mesh(geometry52, material52);
+                                mesh52.position.set(-46, 8, -46);
+                                mesh52.rotation.set(0, 0, 0);
+                                //SILLON7 RESPALDO  BLANCO 1
+                                var geometry53 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material53 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh53 = new THREE.Mesh(geometry53, material53);
+                                mesh53.position.set(-46, 8, -38);
+                                mesh53.rotation.set(0, 0, 0);
+                                ////////////////////////////
+                                //sillon8 color  negro
+
+                                var geometry54 = new THREE.BoxGeometry(8, 2, 15);
+                                var material54 = new THREE.MeshLambertMaterial({ color: 0x050505 });
+                                var mesh54 = new THREE.Mesh(geometry54, material54);
+                                mesh54.position.set(-23, 1.5, -42);
+                                mesh54.rotation.set(0, 0, 0);
+
+                                //sillon8 color turqueza
+                                var geometry55 = new THREE.BoxGeometry(6, 3, 15);
+                                var material55 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh55 = new THREE.Mesh(geometry55, material55);
+                                mesh55.position.set(-23, 4, -42);
+                                mesh55.rotation.set(0, 0, 0);
+
+                                //sillon8 Respaldo   
+                                var geometry56 = new THREE.BoxGeometry(2, 10, 15);
+                                var material56 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh56 = new THREE.Mesh(geometry56, material56);
+                                mesh56.position.set(-20, 8, -42);
+                                mesh56.rotation.set(0, 0, 0);
+                                //sillon 8 blanco respaldo  1
+
+                                var geometry57 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material57 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh57 = new THREE.Mesh(geometry57, material57);
+                                mesh57.position.set(-21, 8, -46);
+                                mesh57.rotation.set(0, 0, 0);
+                                //sillon 8 blanco respaldo  2
+
+                                var geometry58 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material58 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh58 = new THREE.Mesh(geometry58, material58);
+                                mesh58.position.set(-21, 8, -38);
+                                mesh58.rotation.set(0, 0, 0);
+                                //////////////////////////////////////////////
+                                //sillon9 color  negro
+
+                                var geometry59 = new THREE.BoxGeometry(8, 2, 15);
+                                var material59 = new THREE.MeshLambertMaterial({ color: 0x050505 });
+                                var mesh59 = new THREE.Mesh(geometry59, material59);
+                                mesh59.position.set(-16, 1.5, -42);
+                                mesh59.rotation.set(0, 0, 0);
+
+                                //sillon9 color turqueza
+                                var geometry60 = new THREE.BoxGeometry(6, 3, 15);
+                                var material60 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh60 = new THREE.Mesh(geometry60, material60);
+                                mesh60.position.set(-15, 4, -42);
+                                mesh60.rotation.set(0, 0, 0);
+
+                                //sillon9Respaldo   
+                                var geometry61 = new THREE.BoxGeometry(2, 10, 15);
+                                var material61 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh61 = new THREE.Mesh(geometry61, material61);
+                                mesh61.position.set(-18, 8, -42);
+                                mesh61.rotation.set(0, 0, 0);
+
+                                //SILLON 9 RESPALDO  BLANCO 2
+                                var geometry62 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material62 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh62 = new THREE.Mesh(geometry62, material62);
+                                mesh62.position.set(-17, 8, -46);
+                                mesh62.rotation.set(0, 0, 0);
+                                //SILLON 9| RESPALDO  BLANCO 1
+                                var geometry63 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material63 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh63 = new THREE.Mesh(geometry63, material63);
+                                mesh63.position.set(-17, 8, -38);
+                                mesh63.rotation.set(0, 0, 0);
+                                ////// //////////////////
+                                //MESA 5 GRIS
+
+                                var geometry64 = new THREE.BoxGeometry(12, 12, 2);
+                                var material64 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh64 = new THREE.Mesh(geometry64, material64);
+                                mesh64.position.set(-6, 10, -42);
+                                mesh64.rotation.set(-1.57, 0, -1.58);
+                                //MESA 5 BLANCO
+                                var geometry65 = new THREE.BoxGeometry(12, 12, 0.5);
+                                var material65 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh65 = new THREE.Mesh(geometry65, material65);
+                                mesh65.position.set(-6, 11, -42);
+                                mesh65.rotation.set(-1.57, 0, -1.58);
+
+                                //tubo mesa 5
+                                var geometry66 = new THREE.CylinderGeometry(0.5, 0.5, 9, 8, 5)
+                                var material66 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh66 = new THREE.Mesh(geometry66, material66);
+                                mesh66.position.set(-6, 5, -42);
+                                mesh66.rotation.set(0, 0, 0);
+                                //tapa tubo mesa 5
+                                var geometry67 = new THREE.CylinderGeometry(5, 5, 0.5, 10, 5)
+                                var material67 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh67 = new THREE.Mesh(geometry67, material67);
+                                mesh67.position.set(-6, 1, -42);
+                                mesh67.rotation.set(0, 0, 0);
+                                ////////////////////////////////       
+                                //sillon 10 color  negro
+
+                                var geometry68 = new THREE.BoxGeometry(8, 2, 15);
+                                var material68 = new THREE.MeshLambertMaterial({ color: 0x050505 });
+                                var mesh68 = new THREE.Mesh(geometry68, material68);
+                                mesh68.position.set(4, 1.5, -42);
+                                mesh68.rotation.set(0, 0, 0);
+
+                                //sillon 10 color turqueza
+                                var geometry69 = new THREE.BoxGeometry(6, 3, 15);
+                                var material69 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh69 = new THREE.Mesh(geometry69, material69);
+                                mesh69.position.set(4, 4, -42);
+                                mesh69.rotation.set(0, 0, 0);
+
+                                //sillon 10 Respaldo   
+                                var geometry70 = new THREE.BoxGeometry(2, 10, 15);
+                                var material70 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh70 = new THREE.Mesh(geometry70, material70);
+                                mesh70.position.set(8, 8, -42);
+                                mesh70.rotation.set(0, 0, 0);
+                                //sillon 10  blanco respaldo  1
+
+                                var geometry71 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material71 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh71 = new THREE.Mesh(geometry71, material71);
+                                mesh71.position.set(7, 8, -46);
+                                mesh71.rotation.set(0, 0, 0);
+                                //sillon 10 blanco respaldo  2
+
+                                var geometry72 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material72 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh72 = new THREE.Mesh(geometry72, material72);
+                                mesh72.position.set(7, 8, -38);
+                                mesh72.rotation.set(0, 0, 0);
+                                ///////////////////
+                                //sillon 11 color  negro
+
+                                var geometry73 = new THREE.BoxGeometry(8, 2, 15);
+                                var material73 = new THREE.MeshLambertMaterial({ color: 0x050505 });
+                                var mesh73 = new THREE.Mesh(geometry73, material73);
+                                mesh73.position.set(12, 1.5, -42);
+                                mesh73.rotation.set(0, 0, 0);
+
+                                //sillon 11 color turqueza
+                                var geometry74 = new THREE.BoxGeometry(6, 3, 15);
+                                var material74 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh74 = new THREE.Mesh(geometry74, material74);
+                                mesh74.position.set(12, 4, -42);
+                                mesh74.rotation.set(0, 0, 0);
+
+                                //sillon 11 Respaldo   
+                                var geometry75 = new THREE.BoxGeometry(2, 10, 15);
+                                var material75 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh75 = new THREE.Mesh(geometry75, material75);
+                                mesh75.position.set(9, 8, -42);
+                                mesh75.rotation.set(0, 0, 0);
+
+                                //SILLON 11 RESPALDO  BLANCO 2
+                                var geometry76 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material76 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh76 = new THREE.Mesh(geometry76, material76);
+                                mesh76.position.set(10, 8, -46);
+                                mesh76.rotation.set(0, 0, 0);
+                                //SILLON 11  RESPALDO  BLANCO 1
+                                var geometry77 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material77 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh77 = new THREE.Mesh(geometry77, material77);
+                                mesh77.position.set(10, 8, -38);
+                                mesh77.rotation.set(0, 0, 0);
+                                ////// //////////////////
+                                //MESA 6 GRIS
+
+                                var geometry78 = new THREE.BoxGeometry(12, 12, 2);
+                                var material78 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh78 = new THREE.Mesh(geometry78, material78);
+                                mesh78.position.set(21.5, 10, -42);
+                                mesh78.rotation.set(-1.57, 0, -1.58);
+                                //MESA 6 BLANCO
+                                var geometry79 = new THREE.BoxGeometry(12, 12, 0.5);
+                                var material79 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh79 = new THREE.Mesh(geometry79, material79);
+                                mesh79.position.set(21.5, 11, -42);
+                                mesh79.rotation.set(-1.57, 0, -1.58);
+
+                                //tubo mesa 6
+                                var geometry80 = new THREE.CylinderGeometry(0.5, 0.5, 9, 8, 5)
+                                var material80 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh80 = new THREE.Mesh(geometry80, material80);
+                                mesh80.position.set(21.5, 5, -42);
+                                mesh80.rotation.set(0, 0, 0);
+                                //tapa tubo mesa 6
+                                var geometry81 = new THREE.CylinderGeometry(5, 5, 0.5, 10, 5)
+                                var material81 = new THREE.MeshLambertMaterial({ color: 0xE2E0E0 });
+                                var mesh81 = new THREE.Mesh(geometry81, material81);
+                                mesh81.position.set(21.5, 1, -42);
+                                mesh81.rotation.set(0, 0, 0);
+                                /////////////////////////
+                                //sillon 12 color  negro
+
+                                var geometry82 = new THREE.BoxGeometry(8, 2, 15);
+                                var material82 = new THREE.MeshLambertMaterial({ color: 0x050505 });
+                                var mesh82 = new THREE.Mesh(geometry82, material82);
+                                mesh82.position.set(32, 1.5, -42);
+                                mesh82.rotation.set(0, 0, 0);
+
+                                //sillon 12 color turqueza
+                                var geometry83 = new THREE.BoxGeometry(6, 3, 15);
+                                var material83 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh83 = new THREE.Mesh(geometry83, material83);
+                                mesh83.position.set(31, 4, -42);
+                                mesh83.rotation.set(0, 0, 0);
+
+                                //sillon 12 Respaldo   
+                                var geometry84 = new THREE.BoxGeometry(2, 10, 15);
+                                var material84 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh84 = new THREE.Mesh(geometry84, material84);
+                                mesh84.position.set(35, 8, -42);
+                                mesh84.rotation.set(0, 0, 0);
+                                //sillon 12  blanco respaldo  1
+
+                                var geometry85 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material85 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh85 = new THREE.Mesh(geometry85, material85);
+                                mesh85.position.set(34, 8, -46);
+                                mesh85.rotation.set(0, 0, 0);
+                                //sillon 12 blanco respaldo  29+63
+
+
+                                var geometry86 = new THREE.BoxGeometry(0.5, 10, 4);
+                                var material86 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh86 = new THREE.Mesh(geometry86, material86);
+                                mesh86.position.set(34, 8, -38);
+                                mesh86.rotation.set(0, 0, 0);
+
+                                ///////////////////////////////////////////////////////////////////
+                                // cuadrito 1
+                                var geometry87 = new THREE.BoxGeometry(10, 2, 10, 6, 10, 10);
+                                var material87 = new THREE.MeshLambertMaterial({ color: 0xC6B289 });
+                                var mesh87 = new THREE.Mesh(geometry87, material87);
+                                mesh87.position.set(-0, 25, -49);
+                                mesh87.rotation.set(1.57, 0, 0);
+
+                                var geometry88 = new THREE.BoxGeometry(8, 0.1, 8, 6, 8, 8);
+                                var texture = new THREE.TextureLoader().load("poster heladi.jpg");
+                                var material88 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh88 = new THREE.Mesh(geometry88, material88);
+                                mesh88.position.set(-0, 25, -48);
+                                mesh88.rotation.set(1.57, 0, 0);
+                                ///cuadrito 2 
+                                var geometry89 = new THREE.BoxGeometry(20, 2, 20, 6, 20, 20);
+                                var material89 = new THREE.MeshLambertMaterial({ color: 0xFEFEFF });
+                                var mesh89 = new THREE.Mesh(geometry89, material89);
+                                mesh89.position.set(-18, 29, -49);
+                                mesh89.rotation.set(1.57, 0, 0);
+
+                                var geometry90 = new THREE.BoxGeometry(18, 0.1, 18, 6, 18, 18);
+                                var texture = new THREE.TextureLoader().load("napolitano.jpg");
+                                var material90 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh90 = new THREE.Mesh(geometry90, material90);
+                                mesh90.position.set(-18, 29, -48);
+                                mesh90.rotation.set(1.57, 0, 0);
+                                /// cuadrito 3
+                                var geometry91 = new THREE.BoxGeometry(15, 2, 20, 6, 15, 15);
+                                var material91 = new THREE.MeshLambertMaterial({ color: 0xC6B289 });
+                                var mesh91 = new THREE.Mesh(geometry91, material91);
+                                mesh91.position.set(30, 29, -49);
+                                mesh91.rotation.set(1.57, 0, 0);
+
+                                var geometry92 = new THREE.BoxGeometry(13, 0.1, 18, 6, 13, 13);
+                                var texture = new THREE.TextureLoader().load("screm.jpg");
+                                var material92 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh92 = new THREE.Mesh(geometry92, material92);
+                                mesh92.position.set(30, 29, -48);
+                                mesh92.rotation.set(1.57, 0, 0);
+                                /// cuadrito 4
+                                var geometry93 = new THREE.BoxGeometry(10, 2, 10, 6, 10, 10);
+                                var material93 = new THREE.MeshLambertMaterial({ color: 0xFEFEFF });
+                                var mesh93 = new THREE.Mesh(geometry93, material93);
+                                mesh93.position.set(14, 34, -49);
+                                mesh93.rotation.set(1.57, 0, 0);
+
+                                var geometry94 = new THREE.BoxGeometry(8, 0.1, 8, 6, 8, 8);
+                                var texture = new THREE.TextureLoader().load("mango.jpg");
+                                var material94 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh94 = new THREE.Mesh(geometry94, material94);
+                                mesh94.position.set(14, 34, -48);
+                                mesh94.rotation.set(1.57, 0, 0);
+                                ///// cuadrito 5
+                                var geometry95 = new THREE.BoxGeometry(10, 2, 10, 6, 10, 10);
+                                var material95 = new THREE.MeshLambertMaterial({ color: 0x0A0804 });
+                                var mesh95 = new THREE.Mesh(geometry95, material95);
+                                mesh95.position.set(14, 22, -49);
+                                mesh95.rotation.set(1.57, 0, 0);
+
+                                var geometry96 = new THREE.BoxGeometry(8, 0.1, 8, 6, 8, 8);
+                                var texture = new THREE.TextureLoader().load("paleta.jpg");
+                                var material96 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh96 = new THREE.Mesh(geometry96, material96);
+                                mesh96.position.set(14, 22, -48);
+                                mesh96.rotation.set(1.57, 0, 0); 5
+                                //// cuadrito 6 
+                                var geometry97 = new THREE.BoxGeometry(10, 2, 10, 6, 10, 10);
+                                var material97 = new THREE.MeshLambertMaterial({ color: 0x0A0804 });
+                                var mesh97 = new THREE.Mesh(geometry97, material97);
+                                mesh97.position.set(14, 22, -49);
+                                mesh97.rotation.set(1.57, 0, 0);
+
+                                var geometry98 = new THREE.BoxGeometry(8, 0.1, 8, 6, 8, 8);
+                                var texture = new THREE.TextureLoader().load("paleta.jpg");
+                                var material98 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh98 = new THREE.Mesh(geometry98, material98);
+                                mesh98.position.set(14, 22, -48);
+                                mesh98.rotation.set(1.57, 0, 0); 5
+                                //// cuadrito 7
+                                var geometry99 = new THREE.BoxGeometry(10, 2, 15, 6, 10, 10);
+                                var material99 = new THREE.MeshLambertMaterial({ color: 0x0A0804 });
+                                var mesh99 = new THREE.Mesh(geometry99, material99);
+                                mesh99.position.set(-35, 28, -49);
+                                mesh99.rotation.set(1.57, 0, 0);
+
+                                var geometry100 = new THREE.BoxGeometry(8, 0.1, 13, 6, 8, 8);
+                                var texture = new THREE.TextureLoader().load("conos.jpg");
+                                var material100 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh100 = new THREE.Mesh(geometry100, material100);
+                                mesh100.position.set(-35, 28, -48);
+                                mesh100.rotation.set(1.57, 0, 0); 5
+                                //// cuadrito 8
+                                var geometry101 = new THREE.BoxGeometry(8, 2, 8, 6, 8, 8);
+                                var material101 = new THREE.MeshLambertMaterial({ color: 0xFEFEFF });
+                                var mesh101 = new THREE.Mesh(geometry101, material101);
+                                mesh101.position.set(0, 35, -49);
+                                mesh101.rotation.set(1.57, 0, 0);
+
+                                var geometry102 = new THREE.BoxGeometry(6, 0.1, 6, 6, 6, 6);
+                                var texture = new THREE.TextureLoader().load("limon.jpg");
+                                var material102 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh102 = new THREE.Mesh(geometry102, material102);
+                                mesh102.position.set(0, 35, -48);
+                                mesh102.rotation.set(1.57, 0, 0); 5
+                                //// cuadrito 9
+                                var geometry103 = new THREE.BoxGeometry(8, 2, 8, 6, 8, 8);
+                                var material103 = new THREE.MeshLambertMaterial({ color: 0xFEFEFF });
+                                var mesh103 = new THREE.Mesh(geometry103, material103);
+                                mesh103.position.set(43, 35, -49);
+                                mesh103.rotation.set(1.57, 0, 0);
+
+                                var geometry104 = new THREE.BoxGeometry(6, 0.1, 6, 6, 6, 6);
+                                var texture = new THREE.TextureLoader().load("cereza.jpg");
+                                var material104 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh104 = new THREE.Mesh(geometry104, material104);
+                                mesh104.position.set(43, 35, -48);
+                                mesh104.rotation.set(1.57, 0, 0);
+                                //// cuadrito 10
+                                var geometry105 = new THREE.BoxGeometry(8, 2, 8, 6, 8, 8);
+                                var material105 = new THREE.MeshLambertMaterial({ color: 0xFEFEFF });
+                                var mesh105 = new THREE.Mesh(geometry105, material105);
+                                mesh105.position.set(43, 23, -49);
+                                mesh105.rotation.set(1.57, 0, 0);
+
+                                var geometry106 = new THREE.BoxGeometry(6, 0.1, 6, 6, 6, 6);
+                                var texture = new THREE.TextureLoader().load("coctel.jpg");
+                                var material106 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh106 = new THREE.Mesh(geometry106, material106);
+                                mesh106.position.set(43, 23, -48);
+                                mesh106.rotation.set(1.57, 0, 0);
+                                //// cuadrito 11
+                                var geometry107 = new THREE.BoxGeometry(20, 2, 20, 6, 20, 20);
+                                var material107 = new THREE.MeshLambertMaterial({ color: 0x5F4E2D });
+                                var mesh107 = new THREE.Mesh(geometry107, material107);
+                                mesh107.position.set(-50, 28, -30);
+                                mesh107.rotation.set(1.57, 0, 1.57);
+
+                                var geometry108 = new THREE.BoxGeometry(15, 0.1, 15, 6, 15, 15);
+                                var texture = new THREE.TextureLoader().load("chocolate.jpg");
+                                var material108 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh108 = new THREE.Mesh(geometry108, material108);
+                                mesh108.position.set(-49, 28, -30);
+                                mesh108.rotation.set(1.57, 0, -1.57);
+                                //// cuadrito 12
+                                var geometry109 = new THREE.BoxGeometry(6, 2, 6, 6, 6, 6);
+                                var material109 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh109 = new THREE.Mesh(geometry109, material109);
+                                mesh109.position.set(-50, 35, -45);
+                                mesh109.rotation.set(1.57, 0, 1.57);
+
+                                var geometry110 = new THREE.BoxGeometry(4, 0.1, 4, 6, 4, 4);
+                                var texture = new THREE.TextureLoader().load("ice cream.jpg");
+                                var material110 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh110 = new THREE.Mesh(geometry110, material110);
+                                mesh110.position.set(-49, 35, -45);
+                                mesh110.rotation.set(1.57, 0, -1.57);
+                                //// cuadrito 13
+                                var geometry111 = new THREE.BoxGeometry(6, 2, 6, 6, 6, 6);
+                                var material111 = new THREE.MeshLambertMaterial({ color: 0x010000 });
+                                var mesh111 = new THREE.Mesh(geometry111, material111);
+                                mesh111.position.set(-50, 25, -45);
+                                mesh111.rotation.set(1.57, 0, 1.57);
+
+                                var geometry112 = new THREE.BoxGeometry(4, 0.1, 4, 6, 4, 4);
+                                var texture = new THREE.TextureLoader().load("ice creaaam.jpg");
+                                var material112 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh112 = new THREE.Mesh(geometry112, material112);
+                                mesh112.position.set(-49, 25, -45);
+                                mesh112.rotation.set(1.57, 0, -1.57);
+
+
+                                /// heladeria refris 1
+                                var geometry116 = new THREE.BoxGeometry(10, 20, 10, 10, 8, 6);
+                                var material116 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh116 = new THREE.Mesh(geometry116, material116);
+                                mesh116.position.set(5.5, 5, 20);
+                                mesh116.rotation.set(1.57, 0, 1.57);
+
+                                var geometry1167 = new THREE.BoxGeometry(8, 13, 0.1, 10, 5, 5);
+                                var texture = new THREE.TextureLoader().load("ice ice.jpg");
+                                var material1167 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh1167 = new THREE.Mesh(geometry1167, material1167);
+                                mesh1167.position.set(5.5, 5, 15);
+                                mesh1167.rotation.set(0, 0, 1.57);
+
+
+
+
+                                var geometry117 = new THREE.BoxGeometry(8, 18, 1, 10, 5, 5);
+                                var material117 = new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.5 });
+                                var mesh117 = new THREE.Mesh(geometry117, material117);
+                                mesh117.position.set(5.5, 10.5, 20);
+                                mesh117.rotation.set(1.57, 0, 1.57);
+
+                                var geometry118 = new THREE.BoxGeometry(8, 18, 0.1, 10, 5, 5);
+                                var texture = new THREE.TextureLoader().load("muee.jpg");
+                                var material118 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh118 = new THREE.Mesh(geometry118, material118);
+                                mesh118.position.set(5.5, 10.2, 20);
+                                mesh118.rotation.set(1.57, 0, 1.57);
+
+                                var geometry119 = new THREE.BoxGeometry(10, 20, 0.1, 10, 5, 5);
+                                var material119 = new THREE.MeshLambertMaterial({ color: 0xCBC4C4 });
+                                var mesh119 = new THREE.Mesh(geometry119, material119);
+                                mesh119.position.set(5.5, 10, 20);
+                                mesh119.rotation.set(1.57, 0, 1.57);
+                                /// refri 2
+                                var geometry115 = new THREE.BoxGeometry(10, 20, 10, 10, 8, 6);
+                                var material115 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh115 = new THREE.Mesh(geometry115, material115);
+                                mesh115.position.set(-15, 5, 20);
+                                mesh115.rotation.set(1.57, 0, 1.57);
+
+
+                                var geometry1168 = new THREE.BoxGeometry(8, 13, 0.1, 10, 5, 5);
+                                var texture = new THREE.TextureLoader().load("ice ice.jpg");
+                                var material1168 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh1168 = new THREE.Mesh(geometry1168, material1168);
+                                mesh1168.position.set(-15, 5, 15);
+                                mesh1168.rotation.set(0, 0, 1.57);
+
+                                var geometry120 = new THREE.BoxGeometry(8, 18, 1, 10, 5, 5);
+                                var material120 = new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.5 });
+                                var mesh120 = new THREE.Mesh(geometry120, material120);
+                                mesh120.position.set(-15, 10.5, 20);
+                                mesh120.rotation.set(1.57, 0, 1.57);
+
+                                var geometry121 = new THREE.BoxGeometry(8, 18, 0.1, 10, 5, 5);
+                                var texture = new THREE.TextureLoader().load("mues.jpg");
+                                var material121 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh121 = new THREE.Mesh(geometry121, material121);
+                                mesh121.position.set(-15, 10.2, 20);
+                                mesh121.rotation.set(1.57, 0, 1.57);
+
+                                var geometry122 = new THREE.BoxGeometry(10, 20, 0.1, 10, 5, 5);
+                                var material122 = new THREE.MeshLambertMaterial({ color: 0xCBC4C4 });
+                                var mesh122 = new THREE.Mesh(geometry122, material122);
+                                mesh122.position.set(-15, 10, 20);
+                                mesh122.rotation.set(1.57, 0, 1.57);
+
+                                var geometry123 = new THREE.BoxGeometry(6, 18, .5, 5, 5, 5);
+                                var material123 = new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.5 });
+                                var mesh123 = new THREE.Mesh(geometry123, material123);
+                                mesh123.position.set(-15, 13, 16);
+                                mesh123.rotation.set(.3, 0, -1.57);
+
+                                var geometry124 = new THREE.BoxGeometry(4, 18, .5, 5, 5, 5);
+                                var material124 = new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.5 });
+                                var mesh124 = new THREE.Mesh(geometry124, material124);
+                                mesh124.position.set(-15, 16, 19);
+                                mesh124.rotation.set(-1.57, 0, -1.57);
+
+                                var geometry125 = new THREE.BoxGeometry(6, 18, .5, 5, 5, 5);
+                                var material125 = new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.5 });
+                                var mesh125 = new THREE.Mesh(geometry125, material125);
+                                mesh125.position.set(5.5, 13, 16);
+                                mesh125.rotation.set(.3, 0, -1.57);
+
+                                var geometry126 = new THREE.BoxGeometry(4, 18, .5, 5, 5, 5);
+                                var material126 = new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.5 });
+                                var mesh126 = new THREE.Mesh(geometry126, material126);
+                                mesh126.position.set(5.5, 16, 19);
+                                mesh126.rotation.set(-1.57, 0, -1.57);
+
+                                /// recepcion 
+                                var geometry127 = new THREE.BoxGeometry(10, 1, 10, 15, 5, 5);
+                                var material127 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh127 = new THREE.Mesh(geometry127, material127);
+                                mesh127.position.set(-26, 5, 20);
+                                mesh127.rotation.set(1.57, 0, 1.57);
+
+                                var geometry128 = new THREE.BoxGeometry(10, 1, 10, 15, 5, 5);
+                                var material128 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh128 = new THREE.Mesh(geometry128, material128);
+                                mesh128.position.set(-50, 5, 20);
+                                mesh128.rotation.set(1.57, 0, 1.57);
+
+                                var geometry129 = new THREE.BoxGeometry(10, 25, 1.5, 10, 5, 5);
+                                var material129 = new THREE.MeshLambertMaterial({ color: 0xF80202 });
+                                var mesh129 = new THREE.Mesh(geometry129, material129);
+                                mesh129.position.set(-38, 10, 20);
+                                mesh129.rotation.set(1.57, 0, 1.57);
+                                ///// tubos cartelera 
+                                var geometry130 = new THREE.CylinderGeometry(.1, .1, 12, 5, 5);
+                                var material130 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh130 = new THREE.Mesh(geometry130, material130);
+                                mesh130.position.set(-20, 35, 15);
+
+                                var geometry131 = new THREE.CylinderGeometry(.1, .1, 12, 5, 5);
+                                var material131 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh131 = new THREE.Mesh(geometry131, material131);
+                                mesh131.position.set(-5, 35, 15);
+
+                                var geometry132 = new THREE.CylinderGeometry(.1, .1, 12, 5, 5);
+                                var material132 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh132 = new THREE.Mesh(geometry132, material132);
+                                mesh132.position.set(15, 35, 15);
+
+                                var geometry133 = new THREE.CylinderGeometry(.1, .1, 12, 5, 5);
+                                var material133 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh133 = new THREE.Mesh(geometry133, material133);
+                                mesh133.position.set(-40, 35, 15);
+                                ///cartelera
+                                var geometry134 = new THREE.BoxGeometry(2, 22, 8, 8, 8, 6);
+                                var material134 = new THREE.MeshNormalMaterial({ color: 0x000000 });
+                                var mesh134 = new THREE.Mesh(geometry134, material134);
+                                mesh134.position.set(6, 28, 15);
+                                mesh134.rotation.set(1.57, 0, 1.57);
+
+                                var geometry136 = new THREE.BoxGeometry(.1, 22, 8, 8, 8, 6);
+                                var texture = new THREE.TextureLoader().load("menuu.jpg");
+                                var material136 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh136 = new THREE.Mesh(geometry136, material136);
+                                mesh136.position.set(6, 28, 14);
+                                mesh136.rotation.set(1.57, 0, 1.57);
+
+                                var geometry135 = new THREE.BoxGeometry(2, 22, 8, 8, 8, 6);
+                                var material135 = new THREE.MeshNormalMaterial({ color: 0x000000 });
+                                var mesh135 = new THREE.Mesh(geometry135, material135);
+                                mesh135.position.set(-30, 28, 15);
+                                mesh135.rotation.set(1.57, 0, 1.57);
+
+                                var geometry137 = new THREE.BoxGeometry(.1, 22, 8, 8, 8, 6);
+                                var texture = new THREE.TextureLoader().load("menuuu.jpg");
+                                var material137 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh137 = new THREE.Mesh(geometry137, material137);
+                                mesh137.position.set(-30, 28, 14);
+                                mesh137.rotation.set(1.57, 0, 1.57);
+                                //////////// muebles atras
+
+                                var geometry138 = new THREE.BoxGeometry(8, 25, 8, 8, 8, 6);
+                                var material138 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh138 = new THREE.Mesh(geometry138, material138);
+                                mesh138.position.set(5.5, 4, 45);
+                                mesh138.rotation.set(1.57, 0, 1.57);
+
+                                var geometry142 = new THREE.BoxGeometry(8, 60, 1, 5, 5, 6);
+                                var material142 = new THREE.MeshLambertMaterial({ color: 0xF80202 });
+                                var mesh142 = new THREE.Mesh(geometry142, material142);
+                                mesh142.position.set(-11, 8.5, 45);
+                                mesh142.rotation.set(1.57, 0, 1.57);
+
+                                var geometry1143 = new THREE.BoxGeometry(8, 25, 8, 8, 8, 6);
+                                var material1143 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1143 = new THREE.Mesh(geometry1143, material1143);
+                                mesh1143.position.set(-27, 4, 45);
+                                mesh1143.rotation.set(1.57, 0, 1.57);
+
+
+                                var geometry1144 = new THREE.BoxGeometry(2, 30, 1, 2, 2, 2);
+                                var material1144 = new THREE.MeshLambertMaterial({ color: 0xF80202 });
+                                var mesh1144 = new THREE.Mesh(geometry1144, material1144);
+                                mesh1144.position.set(-10, 15, 48);
+                                mesh1144.rotation.set(1.57, 0, 1.57);
+
+
+                                //// cuadrito  atras 1
+                                var geometry1145 = new THREE.BoxGeometry(10, 1, 16, 6, 8, 8);
+                                var texture = new THREE.TextureLoader().load("discos.jpg");
+                                var material1145 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh1145 = new THREE.Mesh(geometry1145, material1145);
+                                mesh1145.position.set(40, 30, 49);
+                                mesh1145.rotation.set(1.57, 0, 0);
+
+                                var geometry1146 = new THREE.BoxGeometry(16, 1, 16, 6, 8, 8);
+                                var texture = new THREE.TextureLoader().load("amy.jpg");
+                                var material1146 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh1146 = new THREE.Mesh(geometry1146, material1146);
+                                mesh1146.position.set(-5, 30, 48);
+                                mesh1146.rotation.set(1.57, 0, 0);
+
+
+                                ///
+                                var geometry1147 = new THREE.BoxGeometry(10, 1, 10, 6, 8, 8);
+                                var texture = new THREE.TextureLoader().load("luna.jpg");
+                                var material1147 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh1147 = new THREE.Mesh(geometry1147, material1147);
+                                mesh1147.position.set(-25, 30, 49);
+                                mesh1147.rotation.set(1.57, 0, 0);
+
+                                var geometry1148 = new THREE.BoxGeometry(10, 1, 10, 6, 8, 8);
+                                var texture = new THREE.TextureLoader().load("coca.jpg");
+                                var material1148 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh1148 = new THREE.Mesh(geometry1148, material1148);
+                                mesh1148.position.set(18, 30, 48);
+                                mesh1148.rotation.set(1.57, 0, 0);
+
+                                //////////// tubo conos 
+
+                                var geometry1149 = new THREE.CylinderGeometry(1, 1, 15, 10, 15)
+                                var material1149 = new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.5 });
+                                var mesh1149 = new THREE.Mesh(geometry1149, material1149);
+                                mesh1149.position.set(-30, 20, 48);
+
+
+
+                                var geometry1150 = new THREE.CylinderGeometry(1, 1, 1, 10, 15)
+                                var material1150 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1150 = new THREE.Mesh(geometry1150, material1150);
+                                mesh1150.position.set(-30, 10, 48);
+
+
+                                var geometry1151 = new THREE.CylinderGeometry(1, 1, 1, 10, 15)
+                                var material1151 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1151 = new THREE.Mesh(geometry1151, material1151);
+                                mesh1151.position.set(-30, 28, 48);
+
+                                var geometry1152 = new THREE.ConeGeometry(1, 3, 15)
+                                var material1152 = new THREE.MeshLambertMaterial({ color: 0xD2BF63 });
+                                var mesh1152 = new THREE.Mesh(geometry1152, material1152);
+                                mesh1152.position.set(-30, 12, 48);
+                                mesh1152.rotation.set(3.2, 0, 0);
+
+                                var geometry1153 = new THREE.ConeGeometry(1, 3, 15)
+                                var material1153 = new THREE.MeshLambertMaterial({ color: 0xD2BF63 });
+                                var mesh1153 = new THREE.Mesh(geometry1153, material1153);
+                                mesh1153.position.set(-30, 15, 48);
+                                mesh1153.rotation.set(3.2, 0, 0);
+
+                                var geometry1154 = new THREE.ConeGeometry(1, 3, 15)
+                                var material1154 = new THREE.MeshLambertMaterial({ color: 0xD2BF63 });
+                                var mesh1154 = new THREE.Mesh(geometry1154, material1154);
+                                mesh1154.position.set(-30, 18, 48);
+                                mesh1154.rotation.set(3.2, 0, 0);
+
+                                var geometry1155 = new THREE.ConeGeometry(1, 3, 15)
+                                var material1155 = new THREE.MeshLambertMaterial({ color: 0xD2BF63 });
+                                var mesh1155 = new THREE.Mesh(geometry1155, material1155);
+                                mesh1155.position.set(-30, 20, 48);
+                                mesh1155.rotation.set(3.2, 0, 0);
+
+
+
+                                var geometry1156 = new THREE.ConeGeometry(1, 3, 15)
+                                var material1156 = new THREE.MeshLambertMaterial({ color: 0xD2BF63 });
+                                var mesh1156 = new THREE.Mesh(geometry1156, material1156);
+                                mesh1156.position.set(-30, 22, 48);
+                                mesh1156.rotation.set(3.2, 0, 0);
+
+                                var geometry1157 = new THREE.ConeGeometry(1, 3, 15)
+                                var material1157 = new THREE.MeshLambertMaterial({ color: 0xD2BF63 });
+                                var mesh1157 = new THREE.Mesh(geometry1157, material1157);
+                                mesh1157.position.set(-30, 25, 48);
+                                mesh1157.rotation.set(3.2, 0, 0);
+
+
+                                ///  botesitos
+
+
+                                var geometry1158 = new THREE.BoxGeometry(3, 5, 3);
+                                var material1158 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1158 = new THREE.Mesh(geometry1158, material1158);
+                                mesh1158.position.set(20, 18, 48);
+
+
+                                var geometry1159 = new THREE.BoxGeometry(3, 2, 3);
+                                var material1159 = new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.6 });
+                                var mesh1159 = new THREE.Mesh(geometry1159, material1159);
+                                mesh1159.position.set(20, 14.5, 48);
+
+                                var geometry1160 = new THREE.BoxGeometry(1, 1, 0.5);
+                                var material1160 = new THREE.MeshLambertMaterial({ color: 0x5D5757 });
+                                var mesh1160 = new THREE.Mesh(geometry1160, material1160);
+                                mesh1160.position.set(20, 15, 46.4);
+
+
+                                ////botesito 2
+                                var geometry1161 = new THREE.BoxGeometry(3, 5, 3);
+                                var material1161 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1161 = new THREE.Mesh(geometry1161, material1161);
+                                mesh1161.position.set(25, 18, 48);
+
+
+
+                                var geometry1162 = new THREE.BoxGeometry(3, 2, 3);
+                                var material1162 = new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.6 });
+                                var mesh1162 = new THREE.Mesh(geometry1162, material1162);
+                                mesh1162.position.set(25, 14.5, 48);
+
+                                var geometry1163 = new THREE.BoxGeometry(1, 1, 0.5);
+                                var material1163 = new THREE.MeshLambertMaterial({ color: 0x5D5757 });
+                                var mesh1163 = new THREE.Mesh(geometry1163, material1163);
+                                mesh1163.position.set(25, 15, 46.4);
+                                /////botesito 3  
+
+
+                                var geometry1164 = new THREE.BoxGeometry(3, 5, 3);
+                                var material1164 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1164 = new THREE.Mesh(geometry1164, material1164);
+                                mesh1164.position.set(15, 18, 48);
+
+
+
+                                var geometry1165 = new THREE.BoxGeometry(3, 2, 3);
+                                var material1165 = new THREE.MeshLambertMaterial({ transparent: true, opacity: 0.6 });
+                                var mesh1165 = new THREE.Mesh(geometry1165, material1165);
+                                mesh1165.position.set(15, 14.5, 48);
+
+                                var geometry1166 = new THREE.BoxGeometry(1, 1, 0.5);
+                                var material1166 = new THREE.MeshLambertMaterial({ color: 0x5D5757 });
+                                var mesh1166 = new THREE.Mesh(geometry1166, material1166);
+                                mesh1166.position.set(15, 15, 46.4);
+
+                                //tablitas
+
+                                var geometry139 = new THREE.BoxGeometry(8, 10, 1, 1, 1, 1);
+                                var material139 = new THREE.MeshLambertMaterial({ color: 0xFEFEFE });
+                                var mesh139 = new THREE.Mesh(geometry139, material139);
+                                mesh139.position.set(-12, 7.5, 45);
+                                mesh139.rotation.set(1.57, 0, 1.57);
+
+
+                                var geometry140 = new THREE.BoxGeometry(8, 10, 1, 1, 1, 1);
+                                var material140 = new THREE.MeshLambertMaterial({ color: 0xFEFEFE });
+                                var mesh140 = new THREE.Mesh(geometry140, material140);
+                                mesh140.position.set(-12, 4, 45);
+                                mesh140.rotation.set(1.57, 0, 1.57);
+
+
+                                var geometry141 = new THREE.BoxGeometry(8, 10, 1, 1, 1, 1);
+                                var material141 = new THREE.MeshLambertMaterial({ color: 0xFEFEFE });
+                                var mesh141 = new THREE.Mesh(geometry141, material141);
+                                mesh141.position.set(-12, 1, 45);
+                                mesh141.rotation.set(1.57, 0, 1.57);
+
+
+                                ///////////////////// cositas pequeñas 
+
+
+                                var geometry1169 = new THREE.CylinderGeometry(2, 4, 1, 15, 30)
+                                var material1169 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1169 = new THREE.Mesh(geometry1169, material1169);
+                                mesh1169.position.set(10, 9.5, 45);
+
+
+                                var geometry1170 = new THREE.BoxGeometry(2, 8, 2);
+                                var material1170 = new THREE.MeshLambertMaterial({ color: 0xC8C8C8 });
+                                var mesh1170 = new THREE.Mesh(geometry1170, material1170);
+                                mesh1170.position.set(10, 14, 46);
+
+                                var geometry1171 = new THREE.BoxGeometry(3, 3, 7);
+                                var material1171 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1171 = new THREE.Mesh(geometry1171, material1171);
+                                mesh1171.position.set(10, 18, 43.5);
+
+                                var geometry1172 = new THREE.ConeGeometry(3, 3, 5)
+                                var material1172 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1172 = new THREE.Mesh(geometry1172, material1172);
+                                mesh1172.position.set(10, 17, 41);
+                                /////// computadora
+                                var geometry1173 = new THREE.BoxGeometry(5, 8, 2);
+                                var material1173 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1173 = new THREE.Mesh(geometry1173, material1173);
+                                mesh1173.position.set(-35, 11, 20);
+                                mesh1173.rotation.set(1.57, 0, 1.57);
+
+                                var geometry1174 = new THREE.BoxGeometry(.5, 3, 4);
+                                var material1174 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1174 = new THREE.Mesh(geometry1174, material1174);
+                                mesh1174.position.set(-35, 13, 18.5);
+                                mesh1174.rotation.set(2, 0, 1.57);
+
+                                var geometry1175 = new THREE.BoxGeometry(5, 8, .5);
+                                var material1175 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1175 = new THREE.Mesh(geometry1175, material1175);
+                                mesh1175.position.set(-35, 15, 19.5);
+                                mesh1175.rotation.set(0, 0, 1.57);
+
+                                var geometry1176 = new THREE.BoxGeometry(4, 7, .2);
+                                var texture = new THREE.TextureLoader().load("compu.jpg");
+                                var material1176 = new THREE.MeshLambertMaterial({ map: texture });
+                                var mesh1176 = new THREE.Mesh(geometry1176, material1176);
+                                mesh1176.position.set(-35, 15, 19.8);
+                                mesh1176.rotation.set(0, 0, 1.57);
+
+
+                                ///////////// servilleteros
+
+                                var geometry1177 = new THREE.BoxGeometry(2, 2, 4);
+                                var material1177 = new THREE.MeshLambertMaterial({ color: 0x958C8C });
+                                var mesh1177 = new THREE.Mesh(geometry1177, material1177);
+                                mesh1177.position.set(-33, 12, -21);
+                                mesh1177.rotation.set(-1.57, 0, -1.58);
+
+                                var geometry1178 = new THREE.BoxGeometry(2, 2, 4);
+                                var material1178 = new THREE.MeshLambertMaterial({ color: 0x958C8C });
+                                var mesh1178 = new THREE.Mesh(geometry1178, material1178);
+                                mesh1178.position.set(-3, 12, -21);
+                                mesh1178.rotation.set(-1.57, 0, -1.58);
+
+                                var geometry1179 = new THREE.BoxGeometry(2, 2, 4);
+                                var material1179 = new THREE.MeshLambertMaterial({ color: 0x958C8C });
+                                var mesh1179 = new THREE.Mesh(geometry1179, material1179);
+                                mesh1179.position.set(20, 12, -21);
+                                mesh1179.rotation.set(-1.57, 0, -1.58);
+
+
+                                var geometry1180 = new THREE.BoxGeometry(2, 2, 4);
+                                var material1180 = new THREE.MeshLambertMaterial({ color: 0x958C8C });
+                                var mesh1180 = new THREE.Mesh(geometry1180, material1180);
+                                mesh1180.position.set(-34, 12, -42);
+                                mesh1180.rotation.set(-1.57, 0, -1.58);
+
+
+                                var geometry1181 = new THREE.BoxGeometry(2, 2, 4);
+                                var material1181 = new THREE.MeshLambertMaterial({ color: 0x958C8C });
+                                var mesh1181 = new THREE.Mesh(geometry1181, material1181);
+                                mesh1181.position.set(-6, 12, -42);
+                                mesh1181.rotation.set(-1.57, 0, -1.58);
+
+                                var geometry1182 = new THREE.BoxGeometry(2, 2, 4);
+                                var material1182 = new THREE.MeshLambertMaterial({ color: 0x958C8C });
+                                var mesh1182 = new THREE.Mesh(geometry1182, material1182);
+                                mesh1182.position.set(21.5, 12, -42);
+                                mesh1182.rotation.set(-1.57, 0, -1.58);
+                                /////////////////// luces
+
+                                var geometry1183 = new THREE.CylinderGeometry(.1, .1, 8, 5, 5);
+                                var material1183 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1183 = new THREE.Mesh(geometry1183, material1183);
+                                mesh1183.position.set(-20, 36, -30);
+
+                                var light1183 = new THREE.DirectionalLight(0x7561F1, .5);
+                                light1183.position.set(-20, 36, -30);
+
+                                light1183.target.position.set(0, 0, 0);
+
+                                light1183.castShadow = true;
+
+
+
+
+                                var geometry1184 = new THREE.ConeGeometry(3, 4, 20)
+                                var material1184 = new THREE.MeshLambertMaterial({ color: 0xF80202 });
+                                var mesh1184 = new THREE.Mesh(geometry1184, material1184);
+                                var light1184 = new THREE.DirectionalLight(0xF481F6, 5);
+                                light1184.position.set(-20, 34, -30);
+                                mesh1184.position.set(-20, 34, -30);
+
+
+                                var light1184 = new THREE.DirectionalLight(0xF481F6, .5);
+                                light1184.position.set(-20, 34, -30);
+
+                                light1184.target.position.set(0, 0, 0);
+
+                                light1184.castShadow = true;
+
+                                var geometry1185 = new THREE.SphereGeometry(1, 5, 5)
+                                var material1185 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh1185 = new THREE.Mesh(geometry1185, material1185);
+                                mesh1185.position.set(-20, 32, -30);
+                                var light1185 = new THREE.DirectionalLight(0xF481F6, .5);
+                                light1185.position.set(-20, 32, -30);
+
+                                light1185.target.position.set(0, 0, 0);
+
+                                light1185.castShadow = true;
+
+
+                                var geometry1186 = new THREE.CylinderGeometry(.1, .1, 8, 5, 5);
+                                var material1186 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1186 = new THREE.Mesh(geometry1186, material1186);
+                                mesh1186.position.set(-5, 36, -30);
+                                var light1186 = new THREE.DirectionalLight(0xF481F6, .2);
+                                light1186.position.set(-5, 36, -30);
+
+                                light1186.target.position.set(0, 0, 0);
+
+                                light1186.castShadow = true;
+
+
+                                var geometry1187 = new THREE.ConeGeometry(3, 4, 20)
+                                var material1187 = new THREE.MeshLambertMaterial({ color: 0xF80202 });
+                                var mesh1187 = new THREE.Mesh(geometry1187, material1187);
+                                mesh1187.position.set(-5, 34, -30);
+
+                                var geometry1188 = new THREE.SphereGeometry(1, 5, 5)
+                                var material1188 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh1188 = new THREE.Mesh(geometry1188, material1188);
+                                mesh1188.position.set(-5, 32, -30);
+
+
+                                var geometry1189 = new THREE.CylinderGeometry(.1, .1, 8, 5, 5);
+                                var material1189 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1189 = new THREE.Mesh(geometry1189, material1189);
+                                mesh1189.position.set(-40, 36, -30);
+
+
+                                var geometry1190 = new THREE.ConeGeometry(3, 4, 20)
+                                var material1190 = new THREE.MeshLambertMaterial({ color: 0xF80202 });
+                                var mesh1190 = new THREE.Mesh(geometry1190, material1190);
+                                mesh1190.position.set(-40, 34, -30);
+
+                                var geometry1191 = new THREE.SphereGeometry(1, 5, 5)
+                                var material1191 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh1191 = new THREE.Mesh(geometry1191, material1191);
+                                mesh1191.position.set(-40, 32, -30);
+
+                                var light1191 = new THREE.DirectionalLight(0xF481F6, .2);
+                                light1191.position.set(-40, 32, 30);
+
+                                light1191.target.position.set(0, 0, 0);
+
+                                light1191.castShadow = true;
+
+
+                                var geometry1192 = new THREE.CylinderGeometry(.1, .1, 8, 5, 5);
+                                var material1192 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1192 = new THREE.Mesh(geometry1192, material1192);
+                                mesh1192.position.set(15, 36, -30);
+
+
+                                var geometry1193 = new THREE.ConeGeometry(3, 4, 20)
+                                var material1193 = new THREE.MeshLambertMaterial({ color: 0xF80202 });
+                                var mesh1193 = new THREE.Mesh(geometry1193, material1193);
+                                mesh1193.position.set(15, 34, -30);
+
+                                var geometry1194 = new THREE.SphereGeometry(1, 5, 5)
+                                var material1194 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh1194 = new THREE.Mesh(geometry1194, material1194);
+                                mesh1194.position.set(15, 32, -30);
+
+                                var geometry1195 = new THREE.CylinderGeometry(.1, .1, 8, 5, 5);
+                                var material1195 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1195 = new THREE.Mesh(geometry1195, material1195);
+                                mesh1195.position.set(30, 36, -30);
+
+
+                                var geometry1196 = new THREE.ConeGeometry(3, 4, 20)
+                                var material1196 = new THREE.MeshLambertMaterial({ color: 0xF80202 });
+                                var mesh1196 = new THREE.Mesh(geometry1196, material1196);
+                                mesh1196.position.set(30, 34, -30);
+
+                                var geometry1197 = new THREE.SphereGeometry(1, 5, 5)
+                                var material1197 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh1197 = new THREE.Mesh(geometry1197, material1197);
+                                mesh1197.position.set(30, 32, -30);
+
+
+
+                                ///////////////////////// lamparas atras
+                                var geometry1198 = new THREE.CylinderGeometry(.1, .1, 8, 5, 5);
+                                var material1198 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1198 = new THREE.Mesh(geometry1198, material1198);
+                                mesh1198.position.set(-20, 36, 30);
+
+
+                                var geometry1199 = new THREE.ConeGeometry(3, 4, 20)
+                                var material1199 = new THREE.MeshLambertMaterial({ color: 0xF80202 });
+                                var mesh1199 = new THREE.Mesh(geometry1199, material1199);
+                                mesh1199.position.set(-20, 34, 30);
+
+                                var geometry1200 = new THREE.SphereGeometry(1, 5, 5)
+                                var material1200 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh1200 = new THREE.Mesh(geometry1200, material1200);
+                                mesh1200.position.set(-20, 32, 30);
+
+
+
+                                var geometry1201 = new THREE.CylinderGeometry(.1, .1, 8, 5, 5);
+                                var material1201 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1201 = new THREE.Mesh(geometry1201, material1201);
+                                mesh1201.position.set(-5, 36, 30);
+
+                                var light1201 = new THREE.DirectionalLight(0xF481F6, .2);
+                                light1201.position.set(-5, 36, 30);
+
+                                light1201.target.position.set(0, 0, 0);
+
+                                light1201.castShadow = true;
+
+
+                                var geometry1202 = new THREE.ConeGeometry(3, 4, 20)
+                                var material1202 = new THREE.MeshLambertMaterial({ color: 0xF80202 });
+                                var mesh1202 = new THREE.Mesh(geometry1187, material1202);
+                                mesh1202.position.set(-5, 34, 30);
+
+                                var geometry1203 = new THREE.SphereGeometry(1, 5, 5)
+                                var material1203 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh1203 = new THREE.Mesh(geometry1203, material1203);
+                                mesh1203.position.set(-5, 32, 30);
+
+
+                                var geometry1204 = new THREE.CylinderGeometry(.1, .1, 8, 5, 5);
+                                var material1204 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1204 = new THREE.Mesh(geometry1204, material1204);
+                                mesh1204.position.set(-40, 36, 30);
+
+
+                                var geometry1205 = new THREE.ConeGeometry(3, 4, 20)
+                                var material1205 = new THREE.MeshLambertMaterial({ color: 0xF80202 });
+                                var mesh1205 = new THREE.Mesh(geometry1205, material1205);
+                                mesh1205.position.set(-40, 34, 30);
+
+                                var geometry1206 = new THREE.SphereGeometry(1, 5, 5)
+                                var material1206 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh1206 = new THREE.Mesh(geometry1206, material1206);
+                                mesh1206.position.set(-40, 32, 30);
+
+                                var light1206 = new THREE.DirectionalLight(0xF481F6, .2);
+                                light1206.position.set(-40, 32, 30);
+
+                                light1206.target.position.set(0, 0, 0);
+
+                                light1206.castShadow = true;
+
+
+
+                                var geometry1207 = new THREE.CylinderGeometry(.1, .1, 8, 5, 5);
+                                var material1207 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1207 = new THREE.Mesh(geometry1207, material1207);
+                                mesh1207.position.set(15, 36, 30);
+
+
+                                var geometry1208 = new THREE.ConeGeometry(3, 4, 20)
+                                var material1208 = new THREE.MeshLambertMaterial({ color: 0xF80202 });
+                                var mesh1208 = new THREE.Mesh(geometry1208, material1208);
+                                mesh1208.position.set(15, 34, 30);
+
+                                var geometry1209 = new THREE.SphereGeometry(1, 5, 5)
+                                var material1209 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh1209 = new THREE.Mesh(geometry1209, material1209);
+                                mesh1209.position.set(15, 32, 30);
+
+                                var geometry1210 = new THREE.CylinderGeometry(.1, .1, 8, 5, 5);
+                                var material1210 = new THREE.MeshLambertMaterial({ color: 0x000000 });
+                                var mesh1210 = new THREE.Mesh(geometry1210, material1210);
+                                mesh1210.position.set(30, 36, 30);
+
+
+                                var geometry1211 = new THREE.ConeGeometry(3, 4, 20)
+                                var material1211 = new THREE.MeshLambertMaterial({ color: 0xF80202 });
+                                var mesh1211 = new THREE.Mesh(geometry1211, material1211);
+                                mesh1211.position.set(30, 34, 30);
+                                var light1211 = new THREE.DirectionalLight(0xF481F6, .2);
+                                light1211.position.set(30, 34, 30);
+
+                                light1211.target.position.set(0, 0, 0);
+
+                                light1211.castShadow = true;
+
+                                var geometry1212 = new THREE.SphereGeometry(1, 5, 5)
+                                var material1212 = new THREE.MeshLambertMaterial({ color: 0xFFFFFF });
+                                var mesh1212 = new THREE.Mesh(geometry1212, material1212);
+                                mesh1212.position.set(30, 32, 30);
+                                var light1212 = new THREE.DirectionalLight(0xF481F6, .2);
+                                light1212.position.set(30, 32, 30);
+
+                                light1212.target.position.set(0, 0, 0);
+
+                                light1212.castShadow = true;
+
+                                ////////////////sllas afuera
+
+                                var geometry1228 = new THREE.BoxGeometry(10, 1, 30);
+                                var material1228 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1228 = new THREE.Mesh(geometry1228, material1228);
+                                mesh1228.position.set(10, 12, 75);
+                                /////1
+                                var geometry1229 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1229 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1229 = new THREE.Mesh(geometry1229, material1229);
+                                mesh1229.position.set(6, 7, 88);
+                                mesh1229.rotation.set(0, 0, -1);
+                                ////1
+                                var geometry1230 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1230 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1230 = new THREE.Mesh(geometry1230, material1230);
+                                mesh1230.position.set(14, 7, 88);
+                                mesh1230.rotation.set(0, 0, 1);
+                                /////2          
+                                var geometry1231 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1231 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1231 = new THREE.Mesh(geometry1231, material1231);
+                                mesh1231.position.set(6, 7, 62);
+                                mesh1231.rotation.set(0, 0, -1);
+                                //////2
+                                var geometry1232 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1232 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1232 = new THREE.Mesh(geometry1232, material1232);
+                                mesh1232.position.set(14, 7, 62);
+                                mesh1232.rotation.set(0, 0, 1);
+                                /////1
+                                var geometry1233 = new THREE.BoxGeometry(1, 30, 2);
+                                var material1233 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1233 = new THREE.Mesh(geometry1233, material1233);
+                                mesh1233.position.set(9, 6, 88);
+                                mesh1233.rotation.set(1.5, 0, 1.5);
+
+                                ////2
+
+                                var geometry1234 = new THREE.BoxGeometry(1, 30, 2);
+                                var material1234 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1234 = new THREE.Mesh(geometry1234, material1234);
+                                mesh1234.position.set(9, 6, 62);
+                                mesh1234.rotation.set(1.5, 0, -1.5);
+                                /////  banco1 
+
+                                var geometry1235 = new THREE.BoxGeometry(7, 1, 30);
+                                var material1235 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1235 = new THREE.Mesh(geometry1235, material1235);
+                                mesh1235.position.set(21.5, 7, 75);
+                                ///banco2
+
+                                var geometry1236 = new THREE.BoxGeometry(7, 1, 30);
+                                var material1236 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1236 = new THREE.Mesh(geometry1236, material1236);
+                                mesh1236.position.set(-3, 7, 75);
+
+                                ////////////////////////  silla 2 
+
+                                var geometry1237 = new THREE.BoxGeometry(10, 1, 30);
+                                var material1237 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1237 = new THREE.Mesh(geometry1237, material1237);
+                                mesh1237.position.set(-40, 12, 75);
+                                /////1
+                                var geometry1238 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1238 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1238 = new THREE.Mesh(geometry1238, material1238);
+                                mesh1238.position.set(-45, 7, 88);
+                                mesh1238.rotation.set(0, 0, -1);
+                                ////1
+                                var geometry1239 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1239 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1239 = new THREE.Mesh(geometry1239, material1239);
+                                mesh1239.position.set(-35, 7, 88);
+                                mesh1239.rotation.set(0, 0, 1);
+                                /////2          
+                                var geometry1240 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1240 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1240 = new THREE.Mesh(geometry1240, material1240);
+                                mesh1240.position.set(-45, 7, 62);
+                                mesh1240.rotation.set(0, 0, -1);
+                                //////2
+                                var geometry1241 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1241 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1241 = new THREE.Mesh(geometry1241, material1241);
+                                mesh1241.position.set(-35, 7, 62);
+                                mesh1241.rotation.set(0, 0, 1);
+                                /////1 tabla
+                                var geometry1242 = new THREE.BoxGeometry(1, 30, 2);
+                                var material1242 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1242 = new THREE.Mesh(geometry1242, material1242);
+                                mesh1242.position.set(-40, 6, 88);
+                                mesh1242.rotation.set(1.5, 0, 1.5);
+
+                                ////2 tabla
+
+                                var geometry1243 = new THREE.BoxGeometry(1, 30, 2);
+                                var material1243 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1243 = new THREE.Mesh(geometry1243, material1243);
+                                mesh1243.position.set(-40, 6, 62);
+                                mesh1243.rotation.set(1.5, 0, -1.5);
+                                /////  banco1 
+
+                                var geometry1244 = new THREE.BoxGeometry(7, 1, 30);
+                                var material1244 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1244 = new THREE.Mesh(geometry1244, material1244);
+                                mesh1244.position.set(-51, 7, 75);
+                                ///banco2
+
+                                var geometry1245 = new THREE.BoxGeometry(7, 1, 30);
+                                var material1245 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1245 = new THREE.Mesh(geometry1245, material1245);
+                                mesh1245.position.set(-25, 7, 75);
+                                //////////////// silla 3
+
+                                var geometry1246 = new THREE.BoxGeometry(10, 1, 30);
+                                var material1246 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1246 = new THREE.Mesh(geometry1246, material1246);
+                                mesh1246.position.set(55, 12, 75);
+                                /////1
+                                var geometry1247 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1247 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1247 = new THREE.Mesh(geometry1247, material1247);
+                                mesh1247.position.set(52, 7, 88);
+                                mesh1247.rotation.set(0, 0, -1);
+                                ////1
+                                var geometry1248 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1248 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1248 = new THREE.Mesh(geometry1248, material1248);
+                                mesh1248.position.set(60, 7, 88);
+                                mesh1248.rotation.set(0, 0, 1);
+                                /////2          
+                                var geometry1249 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1249 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1249 = new THREE.Mesh(geometry1249, material1249);
+                                mesh1249.position.set(52, 7, 62);
+                                mesh1249.rotation.set(0, 0, -1);
+                                //////2
+                                var geometry1250 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1250 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1250 = new THREE.Mesh(geometry1250, material1250);
+                                mesh1250.position.set(60, 7, 62);
+                                mesh1250.rotation.set(0, 0, 1);
+                                /////1 tabla
+                                var geometry1251 = new THREE.BoxGeometry(1, 30, 2);
+                                var material1251 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1251 = new THREE.Mesh(geometry1251, material1251);
+                                mesh1251.position.set(55, 6, 88);
+                                mesh1251.rotation.set(1.5, 0, 1.5);
+
+                                ////2 tabla
+
+                                var geometry1252 = new THREE.BoxGeometry(1, 30, 2);
+                                var material1252 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1252 = new THREE.Mesh(geometry1252, material1252);
+                                mesh1252.position.set(55, 6, 62);
+                                mesh1252.rotation.set(1.5, 0, -1.5);
+                                /////  banco1 
+
+                                var geometry1253 = new THREE.BoxGeometry(7, 1, 30);
+                                var material1253 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1253 = new THREE.Mesh(geometry1253, material1253);
+                                mesh1253.position.set(67, 7, 75);
+                                ///banco2
+
+                                var geometry1254 = new THREE.BoxGeometry(7, 1, 30);
+                                var material1254 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1254 = new THREE.Mesh(geometry1254, material1254);
+                                mesh1254.position.set(43, 7, 75);
+
+
+                                ////////////////// el otro lado 
+
+
+
+
+                                ////////////////sllas afuera
+
+                                var geometry1255 = new THREE.BoxGeometry(10, 1, 30);
+                                var material1255 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1255 = new THREE.Mesh(geometry1255, material1255);
+                                mesh1255.position.set(10, 12, -75);
+                                /////1
+                                var geometry1256 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1256 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1256 = new THREE.Mesh(geometry1256, material1256);
+                                mesh1256.position.set(6, 7, -88);
+                                mesh1256.rotation.set(0, 0, -1);
+                                ////1
+                                var geometry1257 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1257 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1257 = new THREE.Mesh(geometry1257, material1257);
+                                mesh1257.position.set(14, 7, -88);
+                                mesh1257.rotation.set(0, 0, 1);
+                                /////2          
+                                var geometry1258 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1258 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1258 = new THREE.Mesh(geometry1258, material1258);
+                                mesh1258.position.set(6, 7, -62);
+                                mesh1258.rotation.set(0, 0, -1);
+                                //////2
+                                var geometry1259 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1259 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1259 = new THREE.Mesh(geometry1259, material1259);
+                                mesh1259.position.set(14, 7, -62);
+                                mesh1259.rotation.set(0, 0, 1);
+                                /////1
+                                var geometry1260 = new THREE.BoxGeometry(1, 30, 2);
+                                var material1260 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1260 = new THREE.Mesh(geometry1260, material1260);
+                                mesh1260.position.set(9, 6, -88);
+                                mesh1260.rotation.set(1.5, 0, 1.5);
+
+                                ////2
+
+                                var geometry1261 = new THREE.BoxGeometry(1, 30, 2);
+                                var material1261 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1261 = new THREE.Mesh(geometry1261, material1261);
+                                mesh1261.position.set(9, 6, -62);
+                                mesh1261.rotation.set(1.5, 0, -1.5);
+                                /////  banco1 
+
+                                var geometry1262 = new THREE.BoxGeometry(7, 1, 30);
+                                var material1262 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1262 = new THREE.Mesh(geometry1262, material1262);
+                                mesh1262.position.set(21.5, 7, -75);
+                                ///banco2
+
+                                var geometry1263 = new THREE.BoxGeometry(7, 1, 30);
+                                var material1263 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1263 = new THREE.Mesh(geometry1263, material1263);
+                                mesh1263.position.set(-3, 7, -75);
+
+                                ////////////////////////  silla 2 
+
+                                var geometry1264 = new THREE.BoxGeometry(10, 1, 30);
+                                var material1264 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1264 = new THREE.Mesh(geometry1264, material1264);
+                                mesh1264.position.set(-40, 12, -75);
+                                /////1
+                                var geometry1265 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1265 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1265 = new THREE.Mesh(geometry1265, material1265);
+                                mesh1265.position.set(-45, 7, -88);
+                                mesh1265.rotation.set(0, 0, -1);
+                                ////1
+                                var geometry1266 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1266 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1266 = new THREE.Mesh(geometry1266, material1266);
+                                mesh1266.position.set(-35, 7, -88);
+                                mesh1266.rotation.set(0, 0, 1);
+                                /////2          
+                                var geometry1267 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1267 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1267 = new THREE.Mesh(geometry1267, material1267);
+                                mesh1267.position.set(-45, 7, -62);
+                                mesh1267.rotation.set(0, 0, -1);
+                                //////2
+                                var geometry1268 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1268 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1268 = new THREE.Mesh(geometry1268, material1268);
+                                mesh1268.position.set(-35, 7, -62);
+                                mesh1268.rotation.set(0, 0, 1);
+                                /////1 tabla
+                                var geometry1269 = new THREE.BoxGeometry(1, 30, 2);
+                                var material1269 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1269 = new THREE.Mesh(geometry1269, material1269);
+                                mesh1269.position.set(-40, 6, -88);
+                                mesh1269.rotation.set(1.5, 0, 1.5);
+
+                                ////2 tabla
+
+                                var geometry1270 = new THREE.BoxGeometry(1, 30, 2);
+                                var material1270 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1270 = new THREE.Mesh(geometry1270, material1270);
+                                mesh1270.position.set(-40, 6, -62);
+                                mesh1270.rotation.set(1.5, 0, -1.5);
+                                /////  banco1 
+
+                                var geometry1271 = new THREE.BoxGeometry(7, 1, 30);
+                                var material1271 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1271 = new THREE.Mesh(geometry1271, material1271);
+                                mesh1271.position.set(-51, 7, -75);
+                                ///banco2
+
+                                var geometry1272 = new THREE.BoxGeometry(7, 1, 30);
+                                var material1272 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1272 = new THREE.Mesh(geometry1272, material1272);
+                                mesh1272.position.set(-25, 7, -75);
+                                //////////////// silla 3
+
+                                var geometry1273 = new THREE.BoxGeometry(10, 1, 30);
+                                var material1273 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1273 = new THREE.Mesh(geometry1273, material1273);
+                                mesh1273.position.set(55, 12, -75);
+                                /////1
+                                var geometry1274 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1274 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1274 = new THREE.Mesh(geometry1274, material1274);
+                                mesh1274.position.set(52, 7, -88);
+                                mesh1274.rotation.set(0, 0, -1);
+                                ////1
+                                var geometry1275 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1275 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1275 = new THREE.Mesh(geometry1275, material1275);
+                                mesh1275.position.set(60, 7, -88);
+                                mesh1275.rotation.set(0, 0, 1);
+                                /////2          
+                                var geometry1276 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1276 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1276 = new THREE.Mesh(geometry1276, material1276);
+                                mesh1276.position.set(52, 7, -62);
+                                mesh1276.rotation.set(0, 0, -1);
+                                //////2
+                                var geometry1277 = new THREE.CylinderGeometry(.5, .5, 18, 40, 15)
+                                var material1277 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1277 = new THREE.Mesh(geometry1277, material1277);
+                                mesh1277.position.set(60, 7, -62);
+                                mesh1277.rotation.set(0, 0, 1);
+                                /////1 tabla
+                                var geometry1278 = new THREE.BoxGeometry(1, 30, 2);
+                                var material1278 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1278 = new THREE.Mesh(geometry1278, material1278);
+                                mesh1278.position.set(55, 6, -88);
+                                mesh1278.rotation.set(1.5, 0, 1.5);
+
+                                ////2 tabla
+
+                                var geometry1279 = new THREE.BoxGeometry(1, 30, 2);
+                                var material1279 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1279 = new THREE.Mesh(geometry1279, material1279);
+                                mesh1279.position.set(55, 6, -62);
+                                mesh1279.rotation.set(1.5, 0, -1.5);
+                                /////  banco1 
+
+                                var geometry1280 = new THREE.BoxGeometry(7, 1, 30);
+                                var material1280 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1280 = new THREE.Mesh(geometry1280, material1280);
+                                mesh1280.position.set(67, 7, -75);
+                                ///banco2
+
+                                var geometry1281 = new THREE.BoxGeometry(7, 1, 30);
+                                var material1281 = new THREE.MeshLambertMaterial({ color: 0xBCF3E5 });
+                                var mesh1281 = new THREE.Mesh(geometry1281, material1281);
+                                mesh1281.position.set(43, 7, -75);
+
+
+                                ////// GRUPO DE TODO 
+
+                                var heladeria = new THREE.Group();
+
+                                heladeria.add(
+                                        mesh1, mesh2, mesh3, mesh4, mesh5, mesh6, mesh7, mesh8, mesh9, mesh10, mesh11, mesh12, mesh13, mesh14, mesh15, mesh16, mesh17,
+                                        mesh18, mesh19, mesh20, mesh21, mesh22, mesh23, mesh24, mesh25, mesh26, mesh27, mesh28, mesh29, mesh30, mesh31, mesh32, mesh33,
+                                        mesh34, mesh35, mesh36, mesh37, mesh38, mesh39, mesh40, mesh41, mesh42, mesh43, mesh44, mesh45, mesh46, mesh47, mesh48, mesh49,
+                                        mesh50, mesh51, mesh52, mesh53, mesh54, mesh55, mesh56, mesh57, mesh58, mesh59, mesh60, mesh61, mesh62, mesh63, mesh64, mesh65,
+                                        mesh66, mesh67, mesh68, mesh69, mesh70, mesh71, mesh72, mesh73, mesh74, mesh75, mesh76, mesh77, mesh78, mesh79, mesh80, mesh81,
+                                        mesh82, mesh83, mesh84, mesh85, mesh86, mesh87, mesh88, mesh89, mesh90, mesh91, mesh92, mesh93, mesh94, mesh95, mesh96, mesh97,
+                                        mesh98, mesh99, mesh100, mesh101, mesh102, mesh103, mesh104, mesh105, mesh106, mesh107, mesh108, mesh109, mesh110, mesh111, mesh112,
+                                        mesh113, mesh114, mesh115, mesh116, mesh117, mesh118, mesh119, mesh120, mesh121, mesh122, mesh123, mesh124, mesh125, mesh126, mesh127,
+                                        mesh128, mesh129, mesh130, mesh131, mesh132, mesh133, mesh134, mesh135, mesh136, mesh137, mesh138, mesh139, mesh140, mesh141, mesh142,
+                                        mesh1143, mesh1144, mesh1145, mesh1146, mesh1147, mesh1148, mesh1149, mesh1150, mesh1151, mesh1152, mesh1153, mesh1154, mesh1155,
+                                        mesh1156, mesh1157, mesh1158, mesh1159, mesh1160, mesh1161, mesh1162, mesh1163, mesh1164, mesh1165, mesh1166, mesh1167, mesh1168,
+                                        mesh1169, mesh1170, mesh1171, mesh1172, mesh1173, mesh1174, mesh1175, mesh1176, mesh1177, mesh1178, mesh1179, mesh1180, mesh1181,
+                                        mesh1182, mesh1183, mesh1184, mesh1185, mesh1186, mesh1187, mesh1188, mesh1189, mesh1190, mesh1191, mesh1192, mesh1193, mesh1194,
+                                        mesh1195, mesh1196, mesh1197, mesh1198, mesh1199, mesh1200, mesh1201, mesh1202, mesh1203, mesh1204, mesh1205, mesh1206, mesh1207,
+                                        mesh1208, mesh1209, mesh1210, mesh1211, mesh1212, mesh1213, mesh1214, mesh1215, mesh1216, mesh1217, mesh1218, mesh1219, mesh1220,
+                                        mesh1221, mesh1222, mesh1223, mesh1224, mesh1225, mesh1226, mesh1227, mesh1228, mesh1229, mesh1230, mesh1231, mesh1232, mesh1233,
+                                        mesh1234, mesh1235, mesh1236, mesh1237, mesh1238, mesh1239, mesh1240, mesh1241, mesh1242, mesh1243, mesh1244, mesh1245, mesh1246,
+                                        mesh1247, mesh1248, mesh1249, mesh1250, mesh1251, mesh1252, mesh1253, mesh1254, mesh1255, mesh1256, mesh1257, mesh1258, mesh1259,
+                                        mesh1260, mesh1261, mesh1262, mesh1263, mesh1264, mesh1265, mesh1266, mesh1267, mesh1268, mesh1269, mesh1270, mesh1271, mesh1272,
+                                        mesh1273, mesh1274, mesh1275, mesh1276, mesh1277, mesh1278, mesh1279, mesh1280, mesh1281
+
+                                );
+                                heladeria.position.set(0, 0, 0);
+
+
+                                ////////////////////////////////////////////////////////////////////////////
+
+                                //se añaden las geometrias a la escena
+                                //scene.add(light,light1, light2,light3,light4,light5,light6);
+                                scene.add(
+                                        heladeria
+                                );
+
+                                requestAnimationFrame(render);
+                                scene.add(light1183, light1184, light1185, light1186, light1212, light1211, light1206, light1201, light1191);
+
+
+                                function render() {
+
+                                        //mesh.rotation.x += 0.01; 
+                                        //mesh2.rotation.x += 0.015;
+                                        //mesh3.rotation.x += 0.02;
+                                        //mesh4.rotation.x += 0.025;
+                                        renderer.render(scene, camera);
+                                        requestAnimationFrame(render);
+
+
+                                }
+                        </script>
+                </div>
+        </div>
+</body>
+
+</html>

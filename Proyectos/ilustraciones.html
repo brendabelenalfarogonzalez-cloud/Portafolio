@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ilustraciones | Brenda Belén</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body class="ilustraciones-pagina">
+
+    <main class="ilustraciones-contenedor">
+
+        <a href="../index.html#trabajos" class="ilustraciones-volver">
+            ← VOLVER A TRABAJOS
+        </a>
+
+        <header class="ilustraciones-hero">
+            <p class="ilustraciones-numero">04 / EXPLORACIÓN ARTÍSTICA</p>
+            <h1>ILUSTRACIONES</h1>
+            <p class="ilustraciones-intro">
+                Una colección de trabajos que exploran personajes,
+                escenarios, colores y diferentes técnicas de expresión visual.
+            </p>
+        </header>
+
+        <nav class="ilustraciones-menu">
+            <a href="#pintura">PINTURA</a>
+            <a href="#tradicional">DIBUJO TRADICIONAL</a>
+            <a href="#digital">ILUSTRACIÓN DIGITAL</a>
+        </nav>
+
+        <!-- PINTURA -->
+        <section class="ilustraciones-seccion" id="pintura">
+            <p class="ilustraciones-etiqueta">01 / COLOR Y COMPOSICIÓN</p>
+            <h2>PINTURA</h2>
+            <p class="ilustraciones-descripcion">
+                Exploración de paisajes, personajes y ambientes
+                mediante técnicas de pintura tradicional.
+            </p>
+
+            <div class="ilustraciones-galeria">
+
+                <figure class="ilustracion-bosque">
+                    <img src="../assets/ilustraciones/bosque.png" alt="Bosque fantástico">
+                    <figcaption>BOSQUE</figcaption>
+                </figure>
+
+                <figure class="ilustracion-jacaranda">
+                    <img src="../assets/ilustraciones/jacaranda.png" alt="Paisaje de jacarandas">
+                    <figcaption>JACARANDA</figcaption>
+                </figure>
+
+                <figure class="ilustracion-diablos">
+                    <img src="../assets/ilustraciones/diablos.png" alt="Pintura de personaje">
+                    <figcaption>DIABLO</figcaption>
+                </figure>
+
+            </div>
+        </section>
+
+        <!-- DIBUJO TRADICIONAL -->
+        <section class="ilustraciones-seccion" id="tradicional">
+            <p class="ilustraciones-etiqueta">02 / LÍNEA Y PERSONAJES</p>
+            <h2>DIBUJO TRADICIONAL</h2>
+            <p class="ilustraciones-descripcion">
+                Bocetos, personajes y exploraciones realizadas
+                a mano con diferentes materiales.
+            </p>
+
+            <div class="ilustraciones-galeria">
+
+                <figure class="ilustracion-dragon">
+                    <img src="../assets/ilustraciones/dragon.png" alt="Dragón">
+                    <figcaption>DRAGÓN</figcaption>
+                </figure>
+
+                <figure class="ilustracion-monje">
+                    <img src="../assets/ilustraciones/monje.png" alt="Personaje">
+                    <figcaption>PERSONAJE</figcaption>
+                </figure>
+
+                <figure class="ilustracion-payaso">
+                    <img src="../assets/ilustraciones/payaso.png" alt="Payaso">
+                    <figcaption>PAYASO</figcaption>
+                </figure>
+
+                <figure class="ilustracion-coraje">
+                    <img src="../assets/ilustraciones/coraje.png" alt="Coraje">
+                    <figcaption>CORAJE</figcaption>
+                </figure>
+
+                <figure class="ilustracion-muneca">
+                    <img src="../assets/ilustraciones/muñeca.png" alt="Muñeca">
+                    <figcaption>MUÑECA</figcaption>
+                </figure>
+
+            </div>
+        </section>
+
+        <!-- ILUSTRACIÓN DIGITAL -->
+        <section class="ilustraciones-seccion" id="digital">
+            <p class="ilustraciones-etiqueta">03 / ARTE DIGITAL</p>
+            <h2>ILUSTRACIÓN DIGITAL</h2>
+            <p class="ilustraciones-descripcion">
+                Diseño de personajes, escenarios y composiciones digitales
+                con estilos y paletas experimentales.
+            </p>
+
+            <div class="ilustraciones-galeria">
+
+                <figure class="ilustracion-carro">
+                    <img src="../assets/ilustraciones/carro.png" alt="Personaje en automóvil">
+                    <figcaption>CARRO</figcaption>
+                </figure>
+
+                <figure class="ilustracion-diablofumando">
+                    <img src="../assets/ilustraciones/diablofumando.png" alt="Personaje fantástico">
+                    <figcaption>PERSONAJES</figcaption>
+                </figure>
+
+                <figure class="ilustracion-soloaveces">
+                    <img src="../assets/ilustraciones/SoloAveces colores claros.png" alt="Solo a veces">
+                    <figcaption>SOLO A VECES</figcaption>
+                </figure>
+
+
+
+                <figure class="ilustracion-diablito">
+                    <img src="../assets/ilustraciones/DIABLITO ALAS.png" alt="Diablito con alas">
+                    <figcaption>DIABLITO ALAS</figcaption>
+                </figure>
+
+                <figure class="ilustracion-ilustraciondiablos">
+                    <img src="../assets/ilustraciones/Ilustración diablos.png" alt="Ilustración de diablos">
+                    <figcaption>DIABLOS</figcaption>
+                </figure>
+
+                <figure class="ilustracion-420">
+                    <img src="../assets/ilustraciones/420.png" alt="Ilustración 420">
+                    <figcaption>420</figcaption>
+                </figure>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- VISOR DE IMÁGENES -->
+    <dialog class="ilustraciones-modal" id="visorIlustraciones">
+        <button class="ilustraciones-cerrar" type="button" aria-label="Cerrar imagen">×</button>
+        <img id="imagenAmpliada" alt="">
+        <p id="tituloAmpliado"></p>
+    </dialog>
+
+    <script>
+        const modal = document.getElementById("visorIlustraciones");
+        const imagenAmpliada = document.getElementById("imagenAmpliada");
+        const tituloAmpliado = document.getElementById("tituloAmpliado");
+
+        document.querySelectorAll(".ilustraciones-galeria figure").forEach((figura) => {
+            figura.querySelector("img").addEventListener("click", () => {
+                const imagen = figura.querySelector("img");
+                imagenAmpliada.src = imagen.src;
+                imagenAmpliada.alt = imagen.alt;
+                tituloAmpliado.textContent =
+                    figura.querySelector("figcaption").textContent;
+                modal.showModal();
+            });
+        });
+
+        document.querySelector(".ilustraciones-cerrar")
+            .addEventListener("click", () => modal.close());
+
+        modal.addEventListener("click", (evento) => {
+            if (evento.target === modal) modal.close();
+        });
+    </script>
+
+</body>
+
+</html>

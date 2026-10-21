@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heladería 3D | Brenda Belén</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            font-size: 16px;
+        }
+
+        body {
+            margin: 0;
+            background: #11183d;
+            color: #fffed1;
+            font-family: Arial, sans-serif;
+        }
+
+        .heladeria-proyecto {
+            width: min(90%, 1200px);
+            margin: 0 auto;
+            padding: 60px 0 100px;
+        }
+
+        .volver {
+            display: inline-block;
+            color: #ff5fa2;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        .volver:hover {
+            color: #fffed1;
+        }
+
+        .numero {
+            color: #ff5fa2;
+            margin: 90px 0 10px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .heladeria-titulo {
+            font-size: clamp(48px, 7vw, 100px);
+            margin: 10px 0 20px;
+            line-height: 1.05;
+            font-weight: 900;
+        }
+
+        .categoria {
+            color: #ff5fa2;
+            font-size: 15px;
+            letter-spacing: 2px;
+            font-weight: bold;
+        }
+
+        .descripcion {
+            max-width: 750px;
+            margin: 45px 0;
+            font-size: 19px;
+            line-height: 1.8;
+        }
+
+        .visor-3d {
+            width: 100%;
+            height: 650px;
+            border: 2px solid #ff5fa2;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .visor-3d iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .indicacion {
+            text-align: center;
+            color: #ff5fa2;
+            font-size: 14px;
+            font-weight: bold;
+            letter-spacing: 2px;
+            margin-top: 22px;
+        }
+
+        @media (max-width: 700px) {
+            .heladeria-proyecto {
+                width: 92%;
+                padding: 35px 0 70px;
+            }
+
+            .numero {
+                margin-top: 65px;
+            }
+
+            .heladeria-titulo {
+                font-size: clamp(42px, 10vw, 70px);
+            }
+
+            .descripcion {
+                font-size: 16px;
+                line-height: 1.7;
+            }
+
+            .visor-3d {
+                height: 420px;
+            }
+        }
+    </style>
+
+
+    <link rel="stylesheet" href="../css/style.css">
+
+</head>
+
+<body class="heladeria-pagina"></body>
+
+
+<main class="heladeria-proyecto">
+
+    <a class="volver" href="../index.html#trabajos">
+        ← VOLVER A TRABAJOS
+    </a>
+
+    <p class="numero">
+        04 / PROYECTO INTERACTIVO
+    </p>
+
+    <h1 class="heladeria-titulo">
+        HELADERÍA 3D
+    </h1>
+
+    <p class="categoria">
+        MODELADO 3D · PROGRAMACIÓN · THREE.JS
+    </p>
+
+    <p class="descripcion">
+        Desarrollo de un escenario tridimensional
+        inspirado en una heladería, construido
+        mediante programación web con Three.js.
+        El proyecto integra geometrías, materiales,
+        texturas e iluminación para crear un
+        entorno visual explorable en el navegador.
+    </p>
+
+    <div class="visor-3d">
+        <iframe src="./HELADERIA/HELADERIA.html" title="Escenario interactivo de heladería 3D" loading="lazy">
+        </iframe>
+    </div>
+
+    <p class="indicacion">
+        EXPLORA EL ESCENARIO INTERACTIVO
+    </p>
+
+</main>
+
+</body>
+
+</html>
