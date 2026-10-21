@@ -503,7 +503,7 @@ body {
     left: 48%;
     top: 500px;
 
-    width: 55%;
+    width: 100%;
 
     overflow: hidden;
     border-radius: 8px;
@@ -912,13 +912,13 @@ body {
    1 KIRBY proyectos — VIDEO PRINCIPAL
 ========================================== */
 
-.kirby-video {
+.pagina-proyecto .kirby-video {
     width: 60%;
     margin: 80px auto 0;
     transform: translateX(-25%);
 }
 
-.kirby-video video {
+.pagina-proyecto .kirby-video video {
     display: block;
     width: 80%;
     height: auto;
@@ -6312,4 +6312,29 @@ html:has(.pagina-acerca) {
         top: 550px;
         width: 85px;
     }
+}
+
+
+
+
+
+
+
+
+/* VIDEO KIRBY - SOLO PÁGINA PRINCIPAL */
+
+.trabajos .kirby-video-prueba {
+    position: absolute;
+    left: 40%;
+    top: 300px;
+    width: 2800px;
+    max-width: none;
+    z-index: 10;
+}
+
+.trabajos .kirby-video-prueba video {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
 }
