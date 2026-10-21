@@ -3934,8 +3934,10 @@ body {
     width: 88%;
     margin: 350px auto 0;
 
+
     /* POSICIÓN DE LA SECCIÓN */
-    transform: translate(10px, -7050px);
+    transform: translate(10px, -7300px);
+
 }
 
 /* ENCABEZADO */
@@ -3943,6 +3945,7 @@ body {
 .ux-resultado-encabezado {
     width: 60%;
     margin-bottom: 90px;
+
 }
 
 .ux-resultado-encabezado>span {
@@ -4984,15 +4987,26 @@ body.ilustraciones-pagina {
     width: 200%;
 }
 
+/* ==========================================
+   ILUSTRACIÓN — SOLO A VECES
+========================================== */
+
 .ilustracion-soloaveces {
+    position: relative;
+
+    /* MOVER LA ILUSTRACIÓN */
     left: 800px;
-    top: 0px;
+    top: -100px;
 }
+
+/* TAMAÑO DE LA IMAGEN */
 
 .ilustracion-soloaveces img {
-    width: 200%;
+    display: block;
+    width: 1000px;
+    max-width: none;
+    height: auto;
 }
-
 
 
 
